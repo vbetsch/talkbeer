@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import AppNavbar from "./components/AppNavbar.vue";
+import TheNavbar from "./components/app/TheNavbar.vue";
 </script>
 
 <template>
-    <AppNavbar/>
+    <TheNavbar/>
     <router-view/>
 </template>
 
