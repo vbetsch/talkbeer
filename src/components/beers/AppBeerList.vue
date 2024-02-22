@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import AppBeerItem from "./AppBeerItem.vue";
-import StateManagement from "../states/molecules/StateManagement.vue";
 
 defineProps<{
     beers: BeerType[]
