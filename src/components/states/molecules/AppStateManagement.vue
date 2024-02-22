@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import AppLoading from "../atoms/AppLoading.vue";
+import AppErrorMessage from "../atoms/AppErrorMessage.vue";
+
 defineProps<{
     loading?: boolean
     errorMessage?: string
@@ -6,8 +9,8 @@ defineProps<{
 </script>
 
 <template>
-    <Loading v-if="loading" :loading="true"/>
-    <ErrorMessage v-else-if="errorMessage" :error="errorMessage"/>
+    <AppLoading v-if="loading" :loading="true"/>
+    <AppErrorMessage v-else-if="errorMessage" :error="errorMessage"/>
 </template>
 
 <style scoped>

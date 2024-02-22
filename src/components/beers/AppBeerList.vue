@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import AppBeerItem from "./AppBeerItem.vue";
+import AppStateManagement from "../states/molecules/AppStateManagement.vue";
 
 defineProps<{
     beers: BeerType[]
@@ -9,7 +10,7 @@ defineProps<{
 </script>
 
 <template>
-    <StateManagement :loading="loading" :errorMessage="error"/>
+    <AppStateManagement :loading="loading" :errorMessage="error"/>
     <div class="beers">
         <AppBeerItem :beer="beer" v-for="beer in beers"/>
     </div>
