@@ -2,6 +2,7 @@
 import {ref, onMounted, reactive, Ref} from 'vue';
 import {getAllBeers} from "../queries/beersQueries.ts";
 import {AxiosResponse} from "axios";
+import Beer from "./BeerItem.vue";
 
 let beers: BeerType[] = reactive([]);
 let isLoading: Ref<boolean> = ref(false);
@@ -21,15 +22,13 @@ const fetchData = async () => {
 }
 
 onMounted(fetchData);
-
 </script>
 
 <template>
-    <p v-if="isLoading">Loading...</p>
-    <p class="error" v-else-if="error">{{ error }}</p>
+    <p v-if="isLoading" class="loading">Loading...</p>
+    <p v-else-if="error" class="error">{{ error }}</p>
     <div v-else v-for="beer in beers">
-        <p>ID : {{ beer.id }}</p>
-        <p>Name : {{ beer.name }}</p>
+        <Beer :beer="beer"/>
     </div>
 </template>
 
