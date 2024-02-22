@@ -18,9 +18,9 @@ function clickOnBeer(id: number) {
 </script>
 
 <template>
-    <p v-if="loading" class="loading">Loading...</p>
-    <p v-else-if="error" class="error">{{ error }}</p>
-    <div v-else class="beer" @click="clickOnBeer(beer?.id)">
+    <div class="beer" @click="clickOnBeer(beer?.id)">
+        <p v-if="loading" class="loading">Loading...</p>
+        <p v-else-if="error" class="error">{{ error }}</p>
         <img class="image" :src="beer?.image_url" :alt="beer?.name + ' image'">
         <span class="text">{{ beer?.name }}</span>
     </div>
