@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import BeerList from "./components/BeerList.vue";
 </script>
 
 <template>
-  <p>TalkBeer</p>
+    <h1>TalkBeer</h1>
+    <BeerList/>
 </template>
 
 <style scoped>
