@@ -1,16 +1,17 @@
 <script setup lang="ts">
-import {ref, onMounted} from 'vue';
+import {ref, onMounted, reactive, Ref} from 'vue';
 import {getAllBeers} from "../queries/beersQueries.ts";
+import {AxiosResponse} from "axios";
 
-const beers = ref([]);
-const isLoading = ref(false);
-const error = ref("");
+let beers: BeerType[] = reactive([]);
+let isLoading: Ref<boolean> = ref(false);
+let error: Ref<string> = ref("");
 
-async function fetchData() {
+const fetchData = async () => {
     isLoading.value = true;
     try {
-        const response = await getAllBeers();
-        beers.value = response.data;
+        const response: AxiosResponse<BeerType[], any> = await getAllBeers();
+        beers = response.data;
     } catch (e: any) {
         error.value = 'Error fetching data:' + e.message
         console.error(error.value);
