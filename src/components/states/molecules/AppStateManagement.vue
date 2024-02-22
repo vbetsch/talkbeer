@@ -10,7 +10,7 @@ defineProps<{
 
 <template>
     <AppLoading v-if="loading" :loading="true"/>
-    <AppErrorMessage v-else-if="errorMessage" :error="errorMessage"/>
+    <AppErrorMessage v-if="errorMessage" :error="errorMessage"/>
 </template>
 
 <style scoped>

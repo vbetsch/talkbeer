@@ -2,7 +2,7 @@
 import {getOneBeerByID} from "../../queries/beersQueries.ts";
 import {onMounted, reactive, ref} from "vue";
 import {router} from "../../Router.ts";
-import AppBeerItem from "../../components/beers/AppBeerItem.vue";
+import AppStateManagement from "../../components/states/molecules/AppStateManagement.vue";
 
 let beer = reactive<BeerType>({} as BeerType);
 let isLoading = ref<boolean>(false);
@@ -30,7 +30,11 @@ onMounted(fetchData);
 </script>
 
 <template>
-    <AppBeerItem v-if="!isLoading" :beer="beer"/>
+    <div class="infos">
+        <AppStateManagement :loading="isLoading" :errorMessage="errorMessage"/>
+        <p>Name : {{ beer.name }}</p>
+        <img :src="beer.image_url" :alt="beer.name">
+    </div>
 </template>
 
 <style scoped>
