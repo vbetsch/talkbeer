@@ -11,7 +11,7 @@ export const router = createRouter({
         {
             path: '/beer/:beerId',
             name: 'Beer',
-            component: () => import('./views/BeerPage/index.vue')
+            component: () => import('./views/BeerDetailsPage/index.vue')
         },
     ]
 })
