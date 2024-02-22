@@ -30,15 +30,19 @@
 }
 
 .links {
+    width: 10%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    gap: 20%;
 }
+
 .link {
     display: flex;
     text-decoration: none;
     color: var(--black);
 }
+
 .link:hover {
     text-decoration: underline;
 }
