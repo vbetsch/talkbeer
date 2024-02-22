@@ -1,31 +1,9 @@
 <script setup lang="ts">
-import {ref, onMounted, reactive} from 'vue';
-import {AxiosResponse} from "axios";
-import {getAllBeers} from "../../queries/beersQueries.ts";
-import TheBeerList from "./TheBeerList.vue";
-
-let beers = reactive<BeerType[]>([]);
-let isLoading = ref<boolean>(false);
-let errorMessage = ref<string>("");
-
-const fetchData = async () => {
-    isLoading.value = true;
-    try {
-        const response: AxiosResponse<BeerType[], any> = await getAllBeers();
-        beers = response.data;
-    } catch (e: any) {
-        errorMessage.value = 'Error fetching data:' + e.message
-        console.error(errorMessage.value);
-    } finally {
-        isLoading.value = false;
-    }
-}
-
-onMounted(fetchData);
+import TheBeerList from "./molecules/TheBeerList.vue";
 </script>
 
 <template>
-    <TheBeerList :beers="beers" :loading="isLoading" :error="errorMessage"/>
+    <TheBeerList/>
 </template>
 
 <style scoped>

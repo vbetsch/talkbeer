@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import {router} from "../../Router.ts";
+
+import {router} from "../../../Router.ts";
 
 defineProps<{
     beer: BeerType
