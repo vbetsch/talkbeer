@@ -1,10 +1,9 @@
 <script setup lang="ts">
+import AppNavbar from "./components/AppNavbar.vue";
 </script>
 
 <template>
-    <div>
-        <router-link :to="{ name: 'Home' }">Home</router-link>
-    </div>
+    <AppNavbar/>
     <router-view/>
 </template>
 
