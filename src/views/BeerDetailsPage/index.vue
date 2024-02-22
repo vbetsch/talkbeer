@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import {getOneBeerByID} from "../../queries/beersQueries.ts";
-import {onMounted, reactive, ref, Ref} from "vue";
+import {onMounted, reactive, ref} from "vue";
 import {router} from "../../Router.ts";
 import AppBeerItem from "../../components/beers/AppBeerItem.vue";
 
-let beer: BeerType | {} = reactive({});
-let isLoading: Ref<boolean> = ref(false);
-let errorMessage: Ref<string> = ref("");
+let beer = reactive<BeerType>({} as BeerType);
+let isLoading = ref<boolean>(false);
+let errorMessage = ref<string>("");
 
 const fetchData = async () => {
     isLoading.value = true;
