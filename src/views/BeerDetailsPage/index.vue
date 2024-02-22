@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import {AxiosResponse} from "axios";
 import {getOneBeerByID} from "../../queries/beersQueries.ts";
 import {onMounted, reactive, ref, Ref} from "vue";
 import {router} from "../../Router.ts";
 import AppBeerItem from "../../components/beers/AppBeerItem.vue";
 
-let beers: BeerType[] = reactive([]);
+let beer: BeerType | {} = reactive({});
 let isLoading: Ref<boolean> = ref(false);
 let errorMessage: Ref<string> = ref("");
 
@@ -14,8 +13,10 @@ const fetchData = async () => {
     try {
         const beerId = router?.currentRoute?.value?.params?.beerId
         if (beerId) {
-            const response: AxiosResponse<BeerType[], any> = await getOneBeerByID(beerId);
-            beers = response.data;
+            const {data}: { data: BeerType[] } = await getOneBeerByID(beerId);
+            if (data?.length) {
+                beer = data[0];
+            }
         }
     } catch (e: any) {
         errorMessage.value = 'Error fetching data:' + e.message
@@ -29,7 +30,7 @@ onMounted(fetchData);
 </script>
 
 <template>
-    <AppBeerItem :beer="beers[0]" :loading="isLoading" :error="errorMessage"/>
+    <AppBeerItem v-if="!isLoading" :beer="beer"/>
 </template>
 
 <style scoped>

@@ -3,8 +3,6 @@ import {router} from "../../Router.ts";
 
 defineProps<{
     beer: BeerType
-    loading: boolean
-    error: string
 }>()
 
 function clickOnBeer(id: number) {
@@ -19,8 +17,6 @@ function clickOnBeer(id: number) {
 
 <template>
     <div class="beer" @click="clickOnBeer(beer?.id)">
-        <p v-if="loading" class="loading">Loading...</p>
-        <p v-else-if="error" class="error">{{ error }}</p>
         <img class="image" :src="beer?.image_url" :alt="beer?.name + ' image'">
         <span class="text">{{ beer?.name }}</span>
     </div>

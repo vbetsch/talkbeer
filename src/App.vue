@@ -1,11 +1,16 @@
 <script setup lang="ts">
-import TheNavbar from "./components/app/TheNavbar.vue";
+import TheNavbar from "./components/TheNavbar.vue";
 </script>
 
 <template>
     <TheNavbar/>
-    <router-view/>
+    <div class="container">
+        <router-view/>
+    </div>
 </template>
 
 <style scoped>
+.container {
+    padding: 2% 8vw;
+}
 </style>
