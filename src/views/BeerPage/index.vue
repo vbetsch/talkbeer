@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import {ref, onMounted, reactive, Ref} from 'vue';
 import {AxiosResponse} from "axios";
-import {getAllBeers} from "../../queries/beersQueries.ts";
-import AppBeerList from "../../components/beers/AppBeerList.vue";
+import {getOneBeerByID} from "../../queries/beersQueries.ts";
+import {onMounted, reactive, ref, Ref} from "vue";
+import {router} from "../../Router.ts";
+import AppBeerItem from "../../components/beers/AppBeerItem.vue";
 
 let beers: BeerType[] = reactive([]);
 let isLoading: Ref<boolean> = ref(false);
@@ -11,8 +12,11 @@ let errorMessage: Ref<string> = ref("");
 const fetchData = async () => {
     isLoading.value = true;
     try {
-        const response: AxiosResponse<BeerType[], any> = await getAllBeers();
-        beers = response.data;
+        const beerId = router?.currentRoute?.value?.params?.beerId
+        if (beerId) {
+            const response: AxiosResponse<BeerType[], any> = await getOneBeerByID(beerId);
+            beers = response.data;
+        }
     } catch (e: any) {
         errorMessage.value = 'Error fetching data:' + e.message
         console.error(errorMessage.value);
@@ -25,13 +29,9 @@ onMounted(fetchData);
 </script>
 
 <template>
-    <div class="content">
-        <AppBeerList :beers="beers" :loading="isLoading" :error="errorMessage"/>
-    </div>
+    <AppBeerItem :beer="beers[0]" :loading="isLoading" :error="errorMessage"/>
 </template>
 
 <style scoped>
-.content {
-    padding: 2% 8vw;
-}
+
 </style>

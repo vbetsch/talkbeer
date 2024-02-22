@@ -12,7 +12,7 @@ defineProps<{
     <p v-if="loading" class="loading">Loading...</p>
     <p v-else-if="error" class="error">{{ error }}</p>
     <div v-else class="beers">
-        <AppBeerItem :beer="beer" v-for="beer in beers"/>
+        <AppBeerItem :beer="beer" v-for="beer in beers" :error="error" :loading="loading"/>
     </div>
 </template>
 

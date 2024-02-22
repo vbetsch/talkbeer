@@ -1,13 +1,28 @@
 <script setup lang="ts">
+import {router} from "../../Router.ts";
+
 defineProps<{
     beer: BeerType
+    loading: boolean
+    error: string
 }>()
+
+function clickOnBeer(id: number) {
+    router.push({
+        name: "Beer",
+        params: {
+            beerId: id
+        }
+    })
+}
 </script>
 
 <template>
-    <div class="beer">
-        <img class="image" :src="beer.image_url" :alt="beer.name + ' image'">
-        <span class="text">{{ beer.name }}</span>
+    <p v-if="loading" class="loading">Loading...</p>
+    <p v-else-if="error" class="error">{{ error }}</p>
+    <div v-else class="beer" @click="clickOnBeer(beer?.id)">
+        <img class="image" :src="beer?.image_url" :alt="beer?.name + ' image'">
+        <span class="text">{{ beer?.name }}</span>
     </div>
 </template>
 
