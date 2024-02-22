@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Beer from "./BeerItem.vue";
+import AppBeerItem from "./AppBeerItem.vue";
 
 defineProps<{
     beers: BeerType[]
@@ -13,7 +13,7 @@ defineProps<{
     <p v-else-if="error" class="error">{{ error }}</p>
     <div v-else class="beers">
         <div class="beer" v-for="beer in beers">
-            <Beer :beer="beer"/>
+            <AppBeerItem :beer="beer"/>
         </div>
     </div>
 </template>

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import {ref, onMounted, reactive, Ref} from 'vue';
-import {getAllBeers} from "../queries/beersQueries.ts";
 import {AxiosResponse} from "axios";
-import BeerList from "../components/BeerList.vue";
+import {getAllBeers} from "../../queries/beersQueries.ts";
+import AppBeerList from "../../components/beers/AppBeerList.vue";
 
 let beers: BeerType[] = reactive([]);
 let isLoading: Ref<boolean> = ref(false);
@@ -26,7 +26,7 @@ onMounted(fetchData);
 
 <template>
     <h1>TalkBeer</h1>
-    <BeerList :beers="beers" :loading="isLoading" :error="error" />
+    <AppBeerList :beers="beers" :loading="isLoading" :error="error"/>
 </template>
 
 <style scoped>
