@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import TheNavbar from "./components/TheNavbar.vue";
+import TheNavbar from "./components/router/organisms/TheNavbar.vue";
 </script>
 
 <template>
