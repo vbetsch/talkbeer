@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import BeerDetails from "./molecules/BeerDetails.vue";
+import BeerDetails from "./organism/BeerDetails.vue";
 </script>
 
 <template>
