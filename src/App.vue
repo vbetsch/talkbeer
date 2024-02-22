@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import BeerList from "./components/BeerList.vue";
+import HomePage from "./views/HomePage.vue";
 </script>
 
 <template>
-    <h1>TalkBeer</h1>
-    <BeerList/>
+    <HomePage/>
 </template>
 
 <style scoped>
