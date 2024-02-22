@@ -25,10 +25,13 @@ onMounted(fetchData);
 </script>
 
 <template>
-    <h1>TalkBeer</h1>
-    <AppBeerList :beers="beers" :loading="isLoading" :error="error"/>
+    <div class="content">
+        <AppBeerList :beers="beers" :loading="isLoading" :error="error"/>
+    </div>
 </template>
 
 <style scoped>
-
+.content {
+    padding: 2% 8vw;
+}
 </style>
