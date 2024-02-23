@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import AppStateManagement from "../../../components/states/molecules/AppStateManagement.vue";
 import BeerDetailsInfos from "../molecules/BeerDetailsInfos.vue";
+import {BeerType} from "../../../types/Beer.ts";
 
-interface BeerDetailsProps {
+export interface BeerDetailsProps {
     beer: BeerType
     loading: boolean
     error: string

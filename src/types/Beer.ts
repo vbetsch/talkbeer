@@ -1,4 +1,4 @@
-interface BeerType {
+export interface BeerType {
     id: number
     name: string
     tagline: string

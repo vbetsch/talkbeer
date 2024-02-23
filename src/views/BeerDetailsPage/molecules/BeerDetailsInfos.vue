@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import BeerDetailsInfosLine, {BeerDetailsInfosLineProps} from "../atoms/BeerDetailsInfosLine.vue";
-import AppStateManagement from "../../../components/states/molecules/AppStateManagement.vue";
+import {BeerType} from "../../../types/Beer.ts";
 
-interface BeerDetailsInfosProps {
+export interface BeerDetailsInfosProps {
     beer: BeerType
     loading: boolean
     error: string
@@ -33,11 +33,11 @@ const infos: BeerDetailsInfosLineProps[] = [
         value: props.beer.ebc
     }
 ]
+
 </script>
 
 <template>
     <div class="details">
-        <AppStateManagement :loading="loading" :errorMessage="error" />
         <BeerDetailsInfosLine
             v-if="!loading && !error"
             v-for="info in infos"
