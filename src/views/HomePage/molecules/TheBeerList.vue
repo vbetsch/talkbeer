@@ -1,35 +1,20 @@
 <script setup lang="ts">
-import BeerItem from "../atoms/BeerItem.vue";
-import {AxiosResponse} from "axios";
-import {onMounted, reactive, ref} from "vue";
+import {useBeerStore} from "../../../stores/BeerStore.ts";
+import {onMounted} from "vue";
 import AppStateManagement from "../../../components/states/molecules/AppStateManagement.vue";
-import {getAllBeers} from "../../../queries/beersQueries.ts";
-import {BeerType} from "../../../types/Beer.ts";
+import BeerItem from "../atoms/BeerItem.vue";
+import {storeToRefs} from "pinia";
 
-let beers = reactive<BeerType[]>([]);
-let isLoading = ref<boolean>(false);
-let errorMessage = ref<string>("");
+const store = useBeerStore()
+const {allBeers} = storeToRefs(store)
 
-const fetchData = async () => {
-    isLoading.value = true;
-    try {
-        const response: AxiosResponse<BeerType[], any> = await getAllBeers();
-        beers = response.data;
-    } catch (e: any) {
-        errorMessage.value = 'Error fetching data:' + e.message
-        console.error(errorMessage.value);
-    } finally {
-        isLoading.value = false;
-    }
-}
-
-onMounted(fetchData);
+onMounted(store.setBeersFromData)
 </script>
 
 <template>
-    <AppStateManagement :loading="isLoading" :errorMessage="errorMessage"/>
-    <div class="beers">
-        <BeerItem :beer="beer" v-for="beer in beers"/>
+    <AppStateManagement :loading="store.isLoading" :errorMessage="store.errorMessage"/>
+    <div v-if="!store.isLoading" class="beers">
+        <BeerItem :beer="beer" v-for="beer in allBeers"/>
     </div>
 </template>
 

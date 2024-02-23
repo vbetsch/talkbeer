@@ -1,38 +1,22 @@
 <script setup lang="ts">
-import {onMounted, reactive, ref} from "vue";
+import {onMounted} from "vue";
 import {router} from "../../Router.ts";
-import {getOneBeerByID} from "../../queries/beersQueries.ts";
 import BeerDetails from "./organisms/BeerDetails.vue";
-import {BeerType} from "../../types/Beer.ts";
+import {useBeerStore} from "../../stores/BeerStore.ts";
+import {storeToRefs} from "pinia";
 
-let beer = reactive<BeerType>({} as BeerType);
-let isLoading = ref<boolean>(false);
-let errorMessage = ref<string>("");
+const store = useBeerStore()
+const {currentBeer} = storeToRefs(store)
 
-const fetchData = async () => {
-    isLoading.value = true;
-    try {
-        const beerId = router?.currentRoute?.value?.params?.beerId as string
-        if (beerId) {
-            const {data}: { data: BeerType[] } = await getOneBeerByID(beerId);
-            if (data?.length) {
-                beer = data[0];
-            }
-        }
-    } catch (e: any) {
-        errorMessage.value = 'Error fetching data:' + e.message
-        console.error(errorMessage.value);
-    } finally {
-        isLoading.value = false;
-    }
-}
-onMounted(fetchData);
+const beerId = router?.currentRoute?.value?.params?.beerId as string
+
+onMounted(() => store.setCurrentBeerFromData(beerId))
 </script>
 
 <template>
     <div class="content">
-        <img class="image" :src="beer.image_url" :alt="beer.name">
-        <BeerDetails :beer="beer" :error="errorMessage" :loading="isLoading"/>
+        <img class="image" :src="currentBeer.image_url" :alt="currentBeer.name">
+        <BeerDetails :beer="currentBeer" :error="store.errorMessage" :loading="store.isLoading"/>
     </div>
 </template>
 
