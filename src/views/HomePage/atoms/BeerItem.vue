@@ -2,9 +2,11 @@
 
 import {router} from "../../../Router.ts";
 
-defineProps<{
+export interface BeerItemProps {
     beer: BeerType
-}>()
+}
+
+const props = defineProps<BeerItemProps>()
 
 function clickOnBeer(id: number) {
     router.push({

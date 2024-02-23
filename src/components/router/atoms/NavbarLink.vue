@@ -1,8 +1,10 @@
 <script setup lang="ts">
-defineProps<{
+export interface NavbarLinkProps {
     page: string
     label?: string
-}>()
+}
+
+const props = defineProps<NavbarLinkProps>()
 </script>
 
 <template>

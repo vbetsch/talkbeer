@@ -1,7 +1,9 @@
 <script setup lang="ts">
-defineProps<{
+export interface AppLoadingProps {
     loading: boolean
-}>()
+}
+
+const props = defineProps<AppLoadingProps>()
 </script>
 
 <template>

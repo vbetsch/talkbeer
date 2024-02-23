@@ -1,7 +1,9 @@
 <script setup lang="ts">
-defineProps<{
+export interface AppErrorMessageProps {
     error: string
-}>()
+}
+
+const props = defineProps<AppErrorMessageProps>()
 </script>
 
 <template>

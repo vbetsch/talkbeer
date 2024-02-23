@@ -2,10 +2,12 @@
 import AppLoading from "../atoms/AppLoading.vue";
 import AppErrorMessage from "../atoms/AppErrorMessage.vue";
 
-defineProps<{
-    loading?: boolean
+export interface AppStateManagementProps {
+    loading: boolean
     errorMessage?: string
-}>()
+}
+
+const props = defineProps<AppStateManagementProps>()
 </script>
 
 <template>

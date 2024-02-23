@@ -2,11 +2,13 @@
 import AppStateManagement from "../../../components/states/molecules/AppStateManagement.vue";
 import BeerDetailsInfos from "../molecules/BeerDetailsInfos.vue";
 
-defineProps<{
+interface BeerDetailsProps {
     beer: BeerType
     loading: boolean
     error: string
-}>()
+}
+
+const props = defineProps<BeerDetailsProps>()
 </script>
 
 <template>

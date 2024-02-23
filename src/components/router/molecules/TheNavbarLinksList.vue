@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import NavbarLink from "../atoms/NavbarLink.vue";
-
-defineProps<{
+export interface TheNavbarLinksListProps {
     links: typeof NavbarLink[]
-}>()
+}
+
+const props = defineProps<TheNavbarLinksListProps>()
 </script>
 
 <template>
