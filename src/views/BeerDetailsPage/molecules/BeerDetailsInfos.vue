@@ -27,14 +27,22 @@ const infos: BeerDetailsInfosLineProps[] = [
     {
         label: "Amertume",
         alias: "IBU",
-        value: currentBeer.value.ibu,
-        measurement: "/150"
+        progressBar: {
+            width: 150,
+            color: "blue",
+            value: currentBeer.value.ibu,
+            maxValue: 150
+        }
     },
     {
         label: "Couleur",
         alias: "EBC",
-        value: currentBeer.value.ebc,
-        measurement: "/140"
+        progressBar: {
+            width: 150,
+            color: "green",
+            value: currentBeer.value.ebc,
+            maxValue: 140
+        }
     }
 ]
 
@@ -48,6 +56,7 @@ const infos: BeerDetailsInfosLineProps[] = [
             :alias="info.alias"
             :value="info.value"
             :measurement="info.measurement"
+            :progress-bar="info.progressBar"
         />
     </div>
 </template>
