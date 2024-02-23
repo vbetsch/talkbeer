@@ -27,12 +27,14 @@ const infos: BeerDetailsInfosLineProps[] = [
     {
         label: "Amertume",
         alias: "IBU",
-        value: currentBeer.value.ibu
+        value: currentBeer.value.ibu,
+        measurement: "/150"
     },
     {
         label: "Couleur",
         alias: "EBC",
-        value: currentBeer.value.ebc
+        value: currentBeer.value.ebc,
+        measurement: "/140"
     }
 ]
 
