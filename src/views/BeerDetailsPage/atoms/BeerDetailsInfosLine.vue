@@ -27,7 +27,7 @@ const aliasBetweenParenthesis = computed(() => {
 
 <template>
     <div class="infos-line">
-        <span>{{ label }} <i>{{ aliasBetweenParenthesis }}</i> : </span>
+        <span>{{ label }} {{ aliasBetweenParenthesis }} : </span>
         <AppProgressBarWithCounters
             v-if="progressBar"
             :width="progressBar.width"
@@ -51,6 +51,6 @@ const aliasBetweenParenthesis = computed(() => {
 
 .value {
     font-weight: 500;
-    font-size: 15px;
+    font-size: 16px;
 }
 </style>

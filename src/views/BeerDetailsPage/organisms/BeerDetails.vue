@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import BeerDetailsInfos from "../molecules/BeerDetailsInfos.vue";
 import {BeerType} from "../../../types/Beer.ts";
+import BeerDetailsTitles from "../molecules/BeerDetailsTitles.vue";
 
 export interface BeerDetailsProps {
     beer: BeerType
@@ -13,31 +14,60 @@ const props = defineProps<BeerDetailsProps>()
 
 <template>
     <div v-if="!loading" class="infos">
-        <h1 class="name">{{ beer.name }}</h1>
-        <h2 class="tagline">{{ beer.tagline }}</h2>
-        <p class="description">{{ beer.description }}</p>
-        <BeerDetailsInfos :loading="loading" :error="error" :beer="beer"/>
+        <BeerDetailsTitles :beer="beer"/>
+        <div class="more">
+            <span>Contributed by <span class="value">{{ beer.contributed_by }}</span></span>
+            <span>First Brewed <span class="value">{{ beer.first_brewed }}</span></span>
+        </div>
+        <section class="section description">
+            <h4 class="title">Description</h4>
+            <span class="section-content">{{ beer.description }}</span>
+        </section>
+        <section class="section">
+            <h4 class="title">Details</h4>
+            <div class="section-content">
+                <BeerDetailsInfos :loading="loading" :error="error" :beer="beer"/>
+            </div>
+        </section>
     </div>
 </template>
 
 <style scoped>
 .infos {
     width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 
-.name {
-    font-size: 4em;
+.section-content {
+    font-size: 1.2em;
+    text-justify: auto;
+    border-left: 1px solid var(--light-grey);
+    padding-left: 20px;
+}
+
+.more {
+    display: flex;
+    gap: 30px;
+    color: var(--grey);
+}
+
+.more .value {
+    color: var(--black);
     font-weight: normal;
 }
 
-.tagline {
-    font-size: 2em;
-    font-weight: 200;
-    font-style: italic;
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
 }
 
-.description {
-    font-size: 1.2em;
-    text-justify: auto;
+.title {
+    text-transform: uppercase;
+    font-weight: normal;
+    color: var(--grey);
+    font-size: 14px;
 }
 </style>
