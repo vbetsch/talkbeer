@@ -29,7 +29,7 @@ const infos: BeerDetailsInfosLineProps[] = [
         alias: "IBU",
         progressBar: {
             width: 150,
-            color: "blue",
+            color: "green",
             value: currentBeer.value.ibu,
             maxValue: 150
         }
@@ -39,7 +39,7 @@ const infos: BeerDetailsInfosLineProps[] = [
         alias: "EBC",
         progressBar: {
             width: 150,
-            color: "green",
+            color: "orange",
             value: currentBeer.value.ebc,
             maxValue: 140
         }
