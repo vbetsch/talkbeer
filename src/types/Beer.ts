@@ -6,8 +6,8 @@ export interface BeerType {
     description: string
     image_url: string
     abv: number
-    ibu: number
-    ebc: number
+    ibu?: number
+    ebc?: number
     ph: number
     contributed_by: string
 }

@@ -27,20 +27,20 @@ const infos: BeerDetailsInfosLineProps[] = [
     {
         label: "Amertume",
         alias: "IBU",
+        value: currentBeer.value.ibu,
         progressBar: {
             width: 150,
             color: "green",
-            value: currentBeer.value.ibu,
             maxValue: 150
         }
     },
     {
         label: "Couleur",
         alias: "EBC",
+        value: currentBeer.value.ebc,
         progressBar: {
             width: 150,
             color: "orange",
-            value: currentBeer.value.ebc,
             maxValue: 140
         }
     }
@@ -50,14 +50,16 @@ const infos: BeerDetailsInfosLineProps[] = [
 
 <template>
     <div v-if="!store.isLoading && !store.errorMessage" class="details">
-        <BeerDetailsInfosLine
-            v-for="info in infos"
-            :label="info.label"
-            :alias="info.alias"
-            :value="info.value"
-            :measurement="info.measurement"
-            :progress-bar="info.progressBar"
-        />
+        <div class="detail" v-for="info in infos">
+            <BeerDetailsInfosLine
+                v-if="info.value"
+                :label="info.label"
+                :alias="info.alias"
+                :value="info.value"
+                :measurement="info.measurement"
+                :progress-bar="info.progressBar"
+            />
+        </div>
     </div>
 </template>
 
