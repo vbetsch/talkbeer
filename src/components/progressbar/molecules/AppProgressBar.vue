@@ -13,10 +13,12 @@ const props = defineProps<AppProgressBarProps>()
 const computedContainerStyle = computed(() => {
     return `width: ${props.width}px;`
 })
+
 const computedContentStyle = computed(() => {
     const percents = 100 * props.value / props.maxValue
     return `background-color: ${props.color}; width: ${percents}%;`
 })
+
 </script>
 
 <template>
@@ -36,11 +38,12 @@ const computedContentStyle = computed(() => {
 
 .container {
     display: flex;
-    height: 15px;
+    height: 10px;
     width: 100%;
     content: '';
-    border: 1px solid var(--light-grey);
     border-radius: 15px;
+    box-shadow: 0 0 2px rgb(131, 131, 131);
+
 }
 
 .content {

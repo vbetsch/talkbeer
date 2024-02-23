@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import {computed} from "vue";
-import AppProgressBar, {AppProgressBarProps} from "../../../components/AppProgressBar.vue";
+import AppProgressBarWithCounters, {
+    AppProgressBarWithCountersProps
+} from "../../../components/progressbar/organisms/AppProgressBarWithCounters.vue";
 
 export interface BeerDetailsInfosLineProps {
     label: string
     alias?: string
     value?: string | number
     measurement?: string
-    progressBar?: AppProgressBarProps
+    progressBar?: AppProgressBarWithCountersProps
 }
 
 const props = defineProps<BeerDetailsInfosLineProps>()
@@ -22,14 +24,13 @@ const aliasBetweenParenthesis = computed(() => {
 <template>
     <div v-if="progressBar" class="content">
         <span>{{ label }} {{ aliasBetweenParenthesis }} : </span>
-        <AppProgressBar
+        <AppProgressBarWithCounters
             v-if="progressBar"
-            :color="progressBar.color"
-            :max-value="progressBar.maxValue"
             :width="progressBar.width"
+            :color="progressBar.color"
             :value="progressBar.value"
+            :maxValue="progressBar.maxValue"
         />
-        <span>{{ progressBar.value }}/{{ progressBar.maxValue }}</span>
     </div>
     <div v-else class="content">
         <span>{{ label }} {{ aliasBetweenParenthesis }} : {{ value ?? "--" }}{{ measurement }}</span>
@@ -39,6 +40,8 @@ const aliasBetweenParenthesis = computed(() => {
 <style scoped>
 .content {
     display: flex;
+    justify-content: start;
+    align-items: center;
     gap: 10px;
 }
 </style>
