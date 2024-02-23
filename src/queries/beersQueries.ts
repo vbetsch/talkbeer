@@ -1,5 +1,5 @@
 import {baseAxios} from "./axios.ts";
-import {RouteParamValue} from "vue-router";
+import {BeerType} from "../types/Beer.ts";
 
 export async function getAllBeers() {
     return await baseAxios.get<BeerType[]>("/beers");

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
 import {router} from "../../../Router.ts";
+import {BeerType} from "../../../types/Beer.ts";
 
 export interface BeerItemProps {
     beer: BeerType

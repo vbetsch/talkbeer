@@ -4,6 +4,7 @@ import {AxiosResponse} from "axios";
 import {onMounted, reactive, ref} from "vue";
 import AppStateManagement from "../../../components/states/molecules/AppStateManagement.vue";
 import {getAllBeers} from "../../../queries/beersQueries.ts";
+import {BeerType} from "../../../types/Beer.ts";
 
 let beers = reactive<BeerType[]>([]);
 let isLoading = ref<boolean>(false);

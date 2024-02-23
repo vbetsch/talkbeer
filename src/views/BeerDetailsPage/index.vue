@@ -3,6 +3,7 @@ import {onMounted, reactive, ref} from "vue";
 import {router} from "../../Router.ts";
 import {getOneBeerByID} from "../../queries/beersQueries.ts";
 import BeerDetails from "./organisms/BeerDetails.vue";
+import {BeerType} from "../../types/Beer.ts";
 
 let beer = reactive<BeerType>({} as BeerType);
 let isLoading = ref<boolean>(false);
