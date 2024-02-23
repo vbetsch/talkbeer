@@ -12,7 +12,7 @@ let errorMessage = ref<string>("");
 const fetchData = async () => {
     isLoading.value = true;
     try {
-        const beerId = router?.currentRoute?.value?.params?.beerId
+        const beerId = router?.currentRoute?.value?.params?.beerId as string
         if (beerId) {
             const {data}: { data: BeerType[] } = await getOneBeerByID(beerId);
             if (data?.length) {
