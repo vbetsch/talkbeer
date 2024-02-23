@@ -23,7 +23,7 @@ const computedContentStyle = computed(() => {
 <template>
     <div class="progressbar" :style="computedContainerStyle">
         <div class="container">
-            <div class="content" :style="computedContentStyle"></div>
+            <div class="progress" :style="computedContentStyle"></div>
         </div>
     </div>
 </template>
@@ -45,7 +45,7 @@ const computedContentStyle = computed(() => {
 
 }
 
-.content {
+.progress {
     content: '';
     border-radius: 15px;
 }

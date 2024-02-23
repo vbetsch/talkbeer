@@ -22,8 +22,8 @@ const aliasBetweenParenthesis = computed(() => {
 </script>
 
 <template>
-    <div v-if="progressBar" class="content">
-        <span>{{ label }} {{ aliasBetweenParenthesis }} : </span>
+    <div class="infos-line">
+        <span>{{ label }} <i>{{ aliasBetweenParenthesis }}</i> : </span>
         <AppProgressBarWithCounters
             v-if="progressBar"
             :width="progressBar.width"
@@ -31,17 +31,22 @@ const aliasBetweenParenthesis = computed(() => {
             :value="progressBar.value"
             :maxValue="progressBar.maxValue"
         />
-    </div>
-    <div v-else class="content">
-        <span>{{ label }} {{ aliasBetweenParenthesis }} : {{ value ?? "--" }}{{ measurement }}</span>
+        <div v-else>
+            <span class="value">{{ value ?? "--" }}{{ measurement }}</span>
+        </div>
     </div>
 </template>
 
 <style scoped>
-.content {
+.infos-line {
     display: flex;
     justify-content: start;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
+}
+
+.value {
+    font-weight: 500;
+    font-size: 15px;
 }
 </style>
