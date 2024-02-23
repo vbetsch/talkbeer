@@ -1,7 +1,7 @@
 import {baseAxios} from "./axios.ts";
 import {BeerType} from "../types/Beer.ts";
 
-export async function getAllBeers() {
+export const getAllBeers = async () => {
     return await baseAxios.get<BeerType[]>("/beers");
 }
 
