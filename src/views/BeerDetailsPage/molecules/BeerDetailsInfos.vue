@@ -1,45 +1,46 @@
 <script setup lang="ts">
 import BeerDetailsInfosLine, {BeerDetailsInfosLineProps} from "../atoms/BeerDetailsInfosLine.vue";
-import {BeerType} from "../../../types/Beer.ts";
+import {useBeerStore} from "../../../stores/BeerStore.ts";
+import {storeToRefs} from "pinia";
+import {router} from "../../../Router.ts";
+import {onMounted} from "vue";
 
-export interface BeerDetailsInfosProps {
-    beer: BeerType
-    loading: boolean
-    error: string
-}
+const store = useBeerStore()
+const {currentBeer} = storeToRefs(store)
 
-const props = defineProps<BeerDetailsInfosProps>()
+const beerId = router?.currentRoute?.value?.params?.beerId as string
+
+onMounted(() => store.setCurrentBeerFromData(beerId))
 
 const infos: BeerDetailsInfosLineProps[] = [
     {
         label: "Alcoolémie",
         alias: "ABV",
-        value: props.beer.abv,
+        value: currentBeer.value.abv,
         measurement: "%"
     },
     {
         label: "Acidité",
         alias: "PH",
-        value: props.beer.ph
+        value: currentBeer.value.ph
     },
     {
         label: "Amertume",
         alias: "IBU",
-        value: props.beer.ibu
+        value: currentBeer.value.ibu
     },
     {
         label: "Couleur",
         alias: "EBC",
-        value: props.beer.ebc
+        value: currentBeer.value.ebc
     }
 ]
 
 </script>
 
 <template>
-    <div class="details">
+    <div v-if="!store.isLoading && !store.errorMessage" class="details">
         <BeerDetailsInfosLine
-            v-if="!loading && !error"
             v-for="info in infos"
             :label="info.label"
             :alias="info.alias"
