@@ -8,7 +8,7 @@ export interface AppProgressBarWithCountersProps extends AppProgressBarProps {
 const props = defineProps<AppProgressBarWithCountersProps>()
 
 const computedCounterStyle = computed(() => {
-    return `color: ${props?.color};`
+    return `color: ${props?.color ?? "green"};`
 })
 </script>
 

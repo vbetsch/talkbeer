@@ -2,8 +2,8 @@
 import {computed} from "vue";
 
 export interface AppProgressBarProps {
-    width: number,
-    color: string,
+    width?: number,
+    color?: string,
     value: number,
     maxValue: number
 }
@@ -11,14 +11,13 @@ export interface AppProgressBarProps {
 const props = defineProps<AppProgressBarProps>()
 
 const computedContainerStyle = computed(() => {
-    return `width: ${props.width}px;`
+    return `width: ${props.width ?? 150}px;`
 })
 
 const computedContentStyle = computed(() => {
     const percents = 100 * props.value / props.maxValue
-    return `background-color: ${props.color}; width: ${percents}%;`
+    return `background-color: ${props.color ?? "green"}; width: ${percents}%;`
 })
-
 </script>
 
 <template>
