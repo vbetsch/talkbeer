@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import AppStateManagement from "../../../components/states/molecules/AppStateManagement.vue";
+import BeerDetailsInfos from "../molecules/BeerDetailsInfos.vue";
 
 defineProps<{
     beer: BeerType
@@ -14,6 +15,7 @@ defineProps<{
         <h1 class="name">{{ beer.name }}</h1>
         <h2 class="tagline">{{ beer.tagline }}</h2>
         <p class="description">{{ beer.description }}</p>
+        <BeerDetailsInfos :loading="loading" :error="error" :beer="beer"/>
     </div>
 </template>
 
