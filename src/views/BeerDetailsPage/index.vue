@@ -4,6 +4,7 @@ import {router} from "../../Router.ts";
 import BeerDetails from "./organisms/BeerDetails.vue";
 import {useBeerStore} from "../../stores/BeerStore.ts";
 import {storeToRefs} from "pinia";
+import AppStateManagement from "../../components/states/molecules/AppStateManagement.vue";
 
 const store = useBeerStore()
 const {currentBeer} = storeToRefs(store)
@@ -14,7 +15,8 @@ onMounted(() => store.setCurrentBeerFromData(beerId))
 </script>
 
 <template>
-    <div class="content">
+    <AppStateManagement :loading="store.isLoading" :errorMessage="store.errorMessage"/>
+    <div v-if="!store.isLoading && !store.errorMessage" class="content">
         <img class="image" :src="currentBeer.image_url" :alt="currentBeer.name">
         <BeerDetails :beer="currentBeer" :error="store.errorMessage" :loading="store.isLoading"/>
     </div>

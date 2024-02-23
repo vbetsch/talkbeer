@@ -4,7 +4,7 @@ import {router} from "../../../Router.ts";
 import {BeerType} from "../../../types/Beer.ts";
 
 export interface BeerItemProps {
-    beer: BeerType
+    beer?: BeerType
 }
 
 const props = defineProps<BeerItemProps>()
@@ -20,7 +20,7 @@ const clickOnBeer = (id: number) => {
 </script>
 
 <template>
-    <div class="beer" @click="clickOnBeer(beer?.id)">
+    <div v-if="beer" class="beer" @click="clickOnBeer(beer?.id)">
         <img class="image" :src="beer?.image_url" :alt="beer?.name + ' image'">
         <span class="text">{{ beer?.name }}</span>
     </div>

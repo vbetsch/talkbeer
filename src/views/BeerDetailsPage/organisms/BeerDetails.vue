@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import AppStateManagement from "../../../components/states/molecules/AppStateManagement.vue";
 import BeerDetailsInfos from "../molecules/BeerDetailsInfos.vue";
 import {BeerType} from "../../../types/Beer.ts";
 
@@ -13,8 +12,7 @@ const props = defineProps<BeerDetailsProps>()
 </script>
 
 <template>
-    <div class="infos">
-        <AppStateManagement :loading="loading" :errorMessage="error"/>
+    <div v-if="!loading" class="infos">
         <h1 class="name">{{ beer.name }}</h1>
         <h2 class="tagline">{{ beer.tagline }}</h2>
         <p class="description">{{ beer.description }}</p>
