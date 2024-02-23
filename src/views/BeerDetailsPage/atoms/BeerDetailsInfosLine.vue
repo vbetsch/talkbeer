@@ -32,7 +32,7 @@ const aliasBetweenParenthesis = computed(() => {
             v-if="progressBar"
             :width="progressBar.width"
             :color="progressBar.color"
-            :value="value"
+            :progressValue="value"
             :maxValue="progressBar.maxValue"
         />
         <div v-else>
