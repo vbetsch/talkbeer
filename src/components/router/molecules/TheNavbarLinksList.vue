@@ -19,6 +19,6 @@ const props = defineProps<TheNavbarLinksListProps>()
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 10%;
+    gap: 75%;   /* TODO: Fix link position to all cases */
 }
 </style>
