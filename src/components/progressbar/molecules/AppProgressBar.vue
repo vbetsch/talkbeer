@@ -23,18 +23,9 @@ const checkComponent = () => {
 }
 
 const getWidth = (progressValue: number, maxValue: number) => 100 * progressValue / maxValue
-
-const computedContainerStyle = computed(() => {
-    return `width: ${props.width ?? 150}px;`
-})
-
-const computedContentFixColorStyle = computed(() => {
-    return `background-color: ${props.color}; width: ${getWidth(props.progressValue, props.maxValue)}%;`
-})
-
-const computedContentGradientStyle = computed(() => {
-    return `width: ${100 - getWidth(props.progressValue, props.maxValue)}%;`
-})
+const computedContainerStyle = computed(() => `width: ${props.width ?? 150}px;`)
+const computedContentFixColorStyle = computed(() => `background-color: ${props.color}; width: ${getWidth(props.progressValue, props.maxValue)}%;`)
+const computedContentGradientStyle = computed(() => `width: ${100 - getWidth(props.progressValue, props.maxValue)}%;`)
 
 onMounted(checkComponent)
 </script>

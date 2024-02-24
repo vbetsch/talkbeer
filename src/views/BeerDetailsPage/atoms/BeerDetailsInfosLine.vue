@@ -18,11 +18,7 @@ export interface BeerDetailsInfosLineProps {
 
 const props = defineProps<BeerDetailsInfosLineProps>()
 
-const aliasBetweenParenthesis = computed(() => {
-    if (props.alias) {
-        return `(${props.alias})`
-    }
-})
+const aliasBetweenParenthesis = computed(() => props.alias && `(${props.alias})`)
 </script>
 
 <template>
