@@ -8,7 +8,7 @@ import AppSearchBar from "../../searchbar/AppSearchBar.vue";
         <router-link class="link" :to="{ name: 'Home' }">
             <img class="logo" src="/img/talkbeer.png" alt="logo">
         </router-link>
-        <AppSearchBar placeholder="Rechercher..."/>
+        <AppSearchBar placeholder="Rechercher une bière..."/>
         <TheNavbarLinksList :links="[
             {
                 page: 'Home'
