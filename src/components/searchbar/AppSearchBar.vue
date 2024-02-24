@@ -9,10 +9,11 @@ export interface AppSearchBarProps {
     iconWidth?: string
 }
 
-const props = defineProps<AppSearchBarProps>()
+const props = withDefaults(defineProps<AppSearchBarProps>(), {
+    totalWidth: "300px",
+    iconWidth: "15px"
+})
 
-let _total_width = ref(props.totalWidth ?? "300px")
-let _icon_width = ref(props.iconWidth ?? "15px")
 let _gap = ref<string>("5px")
 let inputValue = ref<string>("")
 let searchMode = ref<boolean>(false)
@@ -25,9 +26,9 @@ let searchMode = ref<boolean>(false)
 //     ))
 // }
 
-const computeTotalWidth = computed(() => `width: ${_total_width.value};`)
-const computeIconSize = computed(() => `width: ${_icon_width.value}; height: ${_icon_width.value};`)
-const computeInputSize = computed(() => `width: calc(calc(100% - ${_icon_width.value}) - ${_gap.value});`)
+const computeTotalWidth = computed(() => `width: ${props.totalWidth};`)
+const computeIconSize = computed(() => `width: ${props.iconWidth}; height: ${props.iconWidth};`)
+const computeInputSize = computed(() => `width: calc(calc(100% - ${props.iconWidth}) - ${_gap.value});`)
 </script>
 
 <template>
@@ -39,7 +40,7 @@ const computeInputSize = computed(() => `width: calc(calc(100% - ${_icon_width.v
             :style="computeInputSize"
             :placeholder="placeholder"
             @focusout="searchMode = false"
-            @keyup=""
+            @keyup="$emit('onKeyUpSearchBar')"
         >
         <div class="icon-container" :style="computeIconSize">
             <FontAwesomeIcon

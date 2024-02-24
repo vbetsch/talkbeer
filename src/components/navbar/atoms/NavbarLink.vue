@@ -1,18 +1,15 @@
 <script setup lang="ts">
-import {ref} from "vue";
-
 export interface NavbarLinkProps {
     page: string
     label?: string
 }
 
 const props = defineProps<NavbarLinkProps>()
-const _label = ref<string>(props.label ?? props.page)
 </script>
 
 <template>
     <router-link class="link" :to="{ name: page }">
-        <span class="text">{{ _label }}</span>
+        <span class="text">{{ props.label ?? props.page }}</span>
     </router-link>
 </template>
 
