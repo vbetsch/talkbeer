@@ -4,7 +4,7 @@ import TheNavbarLinksList from "../molecules/TheNavbarLinksList.vue";
 
 <template>
     <div class="navbar">
-        <router-link :to="{ name: 'Home' }">
+        <router-link class="link" :to="{ name: 'Home' }">
             <img class="logo" src="/img/talkbeer.png" alt="logo">
         </router-link>
         <TheNavbarLinksList :links="[
@@ -20,12 +20,21 @@ import TheNavbarLinksList from "../molecules/TheNavbarLinksList.vue";
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2vh 8vw;
     box-shadow: 0 0 10px 2px rgb(194, 194, 194);
+    padding: 2vh 15vw;
+    position: fixed;
+    background-color: white;
+    width: 70%;
+    z-index: 9;
+    height: 3vh;
+}
+
+.link {
+    width: 8vw;
+    min-width: 100px;
 }
 
 .logo {
-    min-width: 100px;
-    width: 15%;
+    width: 100%;
 }
 </style>

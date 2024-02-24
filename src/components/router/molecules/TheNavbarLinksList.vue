@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import NavbarLink from "../atoms/NavbarLink.vue";
+
 export interface TheNavbarLinksListProps {
     links: typeof NavbarLink[]
 }
@@ -15,10 +16,9 @@ const props = defineProps<TheNavbarLinksListProps>()
 
 <style scoped>
 .links {
-    width: 10%;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    gap: 20%;
+    justify-content: space-between;
+    width: 10%;
 }
 </style>

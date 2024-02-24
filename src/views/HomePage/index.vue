@@ -22,6 +22,7 @@ onMounted(store.setBeersFromData)
 .beers {
     display: grid;
     grid-template-columns: repeat(auto-fill, 10vw);
+    justify-content: center;
     column-gap: 1vw;
     row-gap: 5vh;
 }
