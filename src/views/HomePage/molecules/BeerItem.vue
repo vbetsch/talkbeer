@@ -34,6 +34,7 @@ const clickOnBeer = (id: number) => {
     align-items: center;
     overflow: hidden;
     text-overflow: ellipsis;
+    cursor: pointer;
     gap: 20px;
 }
 
