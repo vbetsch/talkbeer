@@ -32,7 +32,7 @@ onMounted(checkComponent)
 
 <template>
     <div v-if="!errorComponent" class="progressbar" :style="computedContainerStyle">
-        <div v-if="props.color" class="container fix-color">
+        <div v-if="color" class="container fix-color">
             <div class="progress" :style="computedContentFixColorStyle"></div>
         </div>
         <div v-else class="container gradient">
