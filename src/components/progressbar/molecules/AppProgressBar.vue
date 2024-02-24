@@ -11,6 +11,7 @@ export interface AppProgressBarProps {
 
 const props = defineProps<AppProgressBarProps>()
 
+let _width = ref(props.width ?? 150)
 let errorComponent = ref("")
 
 const checkComponent = () => {
@@ -23,7 +24,7 @@ const checkComponent = () => {
 }
 
 const getWidth = (progressValue: number, maxValue: number) => 100 * progressValue / maxValue
-const computedContainerStyle = computed(() => `width: ${props.width ?? 150}px;`)
+const computedContainerStyle = computed(() => `width: ${_width.value}px;`)
 const computedContentFixColorStyle = computed(() => `background-color: ${props.color}; width: ${getWidth(props.progressValue, props.maxValue)}%;`)
 const computedContentGradientStyle = computed(() => `width: ${100 - getWidth(props.progressValue, props.maxValue)}%;`)
 
