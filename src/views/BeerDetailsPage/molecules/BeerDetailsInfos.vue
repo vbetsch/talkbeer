@@ -25,12 +25,12 @@ const infos: BeerDetailsInfosLineProps[] = [
         value: currentBeer.value.ph
     },
     {
-        label: "Couleur",
+        label: "Indice de couleur",
         alias: "EBC",
         value: currentBeer.value.ebc,
     },
     {
-        label: "Amertume",
+        label: "Indice d'amertume",
         alias: "IBU",
         value: currentBeer.value.ibu,
         progressBar: {
