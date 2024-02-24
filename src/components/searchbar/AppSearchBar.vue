@@ -14,17 +14,13 @@ const props = withDefaults(defineProps<AppSearchBarProps>(), {
     iconWidth: "15px"
 })
 
+defineEmits<{
+    applyFilter: [text: string]
+    disableSearchMode: []
+}>()
+
 let _gap = ref<string>("5px")
 let inputValue = ref<string>("")
-let searchMode = ref<boolean>(false)
-
-// TODO: Move to navbar
-// function onKeyUpSearchBar() {
-//     searchMode.value = true;
-//     displayedBeers = store.allBeers.filter((beer: BeerType) => (
-//         beer.name.includes(inputValue.value)
-//     ))
-// }
 
 const computeTotalWidth = computed(() => `width: ${props.totalWidth};`)
 const computeIconSize = computed(() => `width: ${props.iconWidth}; height: ${props.iconWidth};`)
@@ -39,8 +35,8 @@ const computeInputSize = computed(() => `width: calc(calc(100% - ${props.iconWid
             v-model="inputValue"
             :style="computeInputSize"
             :placeholder="placeholder"
-            @focusout="searchMode = false"
-            @keyup="$emit('onKeyUpSearchBar')"
+            @focusout="$emit('disableSearchMode')"
+            @keyup="$emit('applyFilter', inputValue)"
         >
         <div class="icon-container" :style="computeIconSize">
             <FontAwesomeIcon

@@ -1,19 +1,35 @@
 <script setup lang="ts">
 import BeerList from "./organisms/BeerList.vue";
 import {useBeerStore} from "../../stores/BeerStore.ts";
-import {storeToRefs} from "pinia";
-import {onMounted} from "vue";
+import {onMounted, reactive, ref} from "vue";
 import AppSearchBar from "../../components/searchbar/AppSearchBar.vue";
+import {BeerType} from "../../types/Beer.ts";
 
 const store = useBeerStore()
-const {allBeers} = storeToRefs(store)
+let displayedBeers = reactive<BeerType[]>(store.allBeers)
+let searchMode = ref<boolean>(false)
 
 onMounted(store.setBeersFromData)
+
+const callbackApplyFilter = (text: string) => {
+    searchMode.value = true;
+    displayedBeers = store.allBeers.filter((beer: BeerType) => (beer.name.includes(text)))
+}
+
+const callbackDisableSearchMode = () => searchMode.value = false
 </script>
 
 <template>
-    <AppSearchBar placeholder="Rechercher... (temp)" totalWidth="150px"/>     <!-- TODO: Move to navbar -->
-    <BeerList :loading="store.isLoading" :error="store.errorMessage" :list="allBeers"/>
+    <AppSearchBar
+        placeholder="Rechercher... (temp)"
+        totalWidth="150px"
+        @applyFilter="callbackApplyFilter"
+        @disableSearchMode="callbackDisableSearchMode"/>  <!-- TODO: Move to navbar -->
+    <BeerList
+        :loading="store.isLoading"
+        :error="store.errorMessage"
+        :list="searchMode ? displayedBeers : store.allBeers"
+    />
 </template>
 
 <style scoped>
