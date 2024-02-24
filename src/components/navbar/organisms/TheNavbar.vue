@@ -32,7 +32,7 @@ import AppSearchBar from "../../searchbar/AppSearchBar.vue";
 }
 
 .link {
-    width: 8vw;
+    width: 6vw;
     min-width: 100px;
 }
 
