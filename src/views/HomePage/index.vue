@@ -14,7 +14,7 @@ onMounted(store.setBeersFromData)
 <template>
     <AppStateManagement :loading="store.isLoading" :errorMessage="store.errorMessage"/>
     <div v-if="!store.isLoading && !store.errorMessage" class="beers">
-        <BeerItem :beer="beer" v-for="beer in allBeers"/>
+        <BeerItem :beer="beer" v-for="beer in allBeers.sort((beerA, beerB) => beerA.name.localeCompare(beerB.name))"/>
     </div>
 </template>
 
@@ -22,6 +22,7 @@ onMounted(store.setBeersFromData)
 .beers {
     display: grid;
     grid-template-columns: repeat(auto-fill, 10vw);
+    column-gap: 1vw;
     row-gap: 5vh;
 }
 

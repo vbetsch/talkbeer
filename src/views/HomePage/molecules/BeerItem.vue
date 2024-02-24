@@ -32,8 +32,7 @@ const clickOnBeer = (id: number) => {
     flex-direction: column;
     justify-content: end;
     align-items: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    text-align: center;
     cursor: pointer;
     gap: 20px;
 }
@@ -45,5 +44,13 @@ const clickOnBeer = (id: number) => {
 
 .text {
     max-height: 20px;
+    background-color: white;
+}
+
+.beer:hover {
+    transform: scale(1.1);
+}
+.beer:hover .text {
+    font-weight: 500;
 }
 </style>
