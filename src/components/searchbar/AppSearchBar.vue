@@ -13,6 +13,7 @@ const props = defineProps<AppSearchBarProps>()
 
 let _total_width = ref(props.totalWidth ?? "300px")
 let _icon_width = ref(props.iconWidth ?? "15px")
+let _gap = ref<string>("5px")
 let inputValue = ref<string>("")
 let searchMode = ref<boolean>(false)
 
@@ -26,6 +27,7 @@ let searchMode = ref<boolean>(false)
 
 const computeTotalWidth = computed(() => `width: ${_total_width.value};`)
 const computeIconSize = computed(() => `width: ${_icon_width.value}; height: ${_icon_width.value};`)
+const computeInputSize = computed(() => `width: calc(calc(100% - ${_icon_width.value}) - ${_gap.value});`)
 </script>
 
 <template>
@@ -34,9 +36,10 @@ const computeIconSize = computed(() => `width: ${_icon_width.value}; height: ${_
             class="search-input"
             type="text"
             v-model="inputValue"
+            :style="computeInputSize"
             :placeholder="placeholder"
-            @keyup=""
             @focusout="searchMode = false"
+            @keyup=""
         >
         <div class="icon-container" :style="computeIconSize">
             <FontAwesomeIcon
@@ -55,7 +58,6 @@ const computeIconSize = computed(() => `width: ${_icon_width.value}; height: ${_
     border: 1px solid #b7b7b7;
     border-radius: 15px;
     padding: 5px 10px;
-    gap: 5%;
 }
 
 .search-input {
@@ -79,7 +81,7 @@ const computeIconSize = computed(() => `width: ${_icon_width.value}; height: ${_
     border-color: var(--grey);
 }
 
-.search-input:focus + .icon {
+.search-input:focus + .icon-container .icon {
     color: var(--grey);
 }
 </style>
