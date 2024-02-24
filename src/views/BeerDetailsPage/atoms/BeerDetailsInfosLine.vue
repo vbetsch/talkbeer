@@ -25,7 +25,7 @@ const aliasBetweenParenthesis = computed(() => props.alias && `(${props.alias})`
     <div class="infos-line">
         <span>{{ label }} {{ aliasBetweenParenthesis }} : </span>
         <AppProgressBarWithCounters
-            v-if="progressBar"
+            v-if="progressBar && value && typeof value === 'number'"
             :width="progressBar.width"
             :color="progressBar.color"
             :progressValue="value"
