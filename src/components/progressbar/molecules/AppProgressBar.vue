@@ -22,13 +22,18 @@ const checkComponent = () => {
     }
 }
 
+const getWidth = (progressValue: number, maxValue: number) => 100 * progressValue / maxValue
+
 const computedContainerStyle = computed(() => {
     return `width: ${props.width ?? 150}px;`
 })
 
-const computedContentStyle = computed(() => {
-    const percents = 100 * props.progressValue / props.maxValue
-    return `background-color: ${props.color ?? "green"}; width: ${percents}%;`
+const computedContentFixColorStyle = computed(() => {
+    return `background-color: ${props.color}; width: ${getWidth(props.progressValue, props.maxValue)}%;`
+})
+
+const computedContentGradientStyle = computed(() => {
+    return `width: ${100 - getWidth(props.progressValue, props.maxValue)}%;`
 })
 
 onMounted(checkComponent)
@@ -36,8 +41,12 @@ onMounted(checkComponent)
 
 <template>
     <div v-if="!errorComponent" class="progressbar" :style="computedContainerStyle">
-        <div class="container">
-            <div class="progress" :style="computedContentStyle"></div>
+        <div v-if="props.color" class="container fix-color">
+            <div class="progress" :style="computedContentFixColorStyle"></div>
+        </div>
+        <div v-else class="container gradient">
+            <div class="progress-bar-child progress"></div>
+            <div class="progress-bar-child shrinker" :style="computedContentGradientStyle"></div>
         </div>
     </div>
 </template>
@@ -50,17 +59,43 @@ onMounted(checkComponent)
 }
 
 .container {
-    display: flex;
     height: 10px;
     width: 100%;
-    content: '';
     border-radius: 15px;
     box-shadow: 0 0 2px rgb(131, 131, 131);
-
 }
 
-.progress {
+/* ------------- FIX COLOR ------------- */
+.container.fix-color {
+    display: flex;
+    content: '';
+}
+
+.container.fix-color .progress {
     content: '';
     border-radius: 15px;
+}
+
+/* ------------- GRADIENT ------------- */
+
+.container.gradient {
+    position: relative;
+    overflow: hidden;
+}
+
+.container.gradient .progress-bar-child {
+    width: 100%;
+    height: 100%;
+}
+
+.container.gradient .progress {
+    background: linear-gradient(to right, #ffef3f 0%, #ffaa3a 50%, #e5405e 100%);
+}
+
+.container.gradient .shrinker {
+    background-color: white;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 </style>

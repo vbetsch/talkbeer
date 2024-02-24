@@ -19,10 +19,6 @@ const checkComponent = () => {
     }
 }
 
-const computedCounterStyle = computed(() => {
-    return `color: ${props?.color ?? "green"};`
-})
-
 onMounted(checkComponent)
 </script>
 
@@ -35,7 +31,7 @@ onMounted(checkComponent)
             :progressValue="props.progressValue"
         />
         <span class="counters">
-            <span class="counter" :style="computedCounterStyle">
+            <span class="counter">
                 {{ props.progressValue }}
             </span>/{{ props.maxValue }}
         </span>

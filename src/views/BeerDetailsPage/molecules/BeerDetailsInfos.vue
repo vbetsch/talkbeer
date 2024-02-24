@@ -35,8 +35,7 @@ const infos: BeerDetailsInfosLineProps[] = [
         value: currentBeer.value.ibu,
         progressBar: {
             width: 150,
-            color: "green",
-            maxValue: 150
+            maxValue: 150,
         }
     },
 ]
