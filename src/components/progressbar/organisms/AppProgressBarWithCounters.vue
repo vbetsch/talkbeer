@@ -25,15 +25,15 @@ onMounted(checkComponent)
 <template>
     <div v-if="!errorComponent" class="navbar-counters">
         <AppProgressBar
-            :color="props.color"
-            :max-value="props.maxValue"
-            :width="props.width"
-            :progressValue="props.progressValue"
+            :color="color"
+            :max-value="maxValue"
+            :width="width"
+            :progressValue="progressValue"
         />
         <span class="counters">
             <span class="counter">
-                {{ props.progressValue }}
-            </span>/{{ props.maxValue }}
+                {{ progressValue }}
+            </span>/{{ maxValue }}
         </span>
     </div>
 </template>
