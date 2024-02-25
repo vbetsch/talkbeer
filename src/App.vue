@@ -11,6 +11,6 @@ import TheNavbar from "./components/navbar/organisms/TheNavbar.vue";
 
 <style scoped>
 .container {
-    padding: 5% 8vw;
+    padding: 12vh 8vw;
 }
 </style>
