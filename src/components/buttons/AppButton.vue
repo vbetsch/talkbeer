@@ -52,5 +52,6 @@ const onMouseLeave = () => {
     align-items: center;
     border-radius: 7px;
     padding: 5px;
+    cursor: pointer;
 }
 </style>
