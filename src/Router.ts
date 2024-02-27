@@ -13,5 +13,10 @@ export const router = createRouter({
             name: 'Beer',
             component: () => import('./views/BeerDetailsPage/index.vue')
         },
+        {
+            path: '/favorites',
+            name: 'Favorites',
+            component: () => import('./views/FavoritesPage/index.vue')
+        },
     ]
 })

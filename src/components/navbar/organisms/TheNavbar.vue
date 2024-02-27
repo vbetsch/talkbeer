@@ -14,6 +14,9 @@ import TheNavbarLinksList from "../molecules/TheNavbarLinksList.vue";
             {
                 page: 'Home'
             },
+            {
+                page: 'Favorites'
+            },
         ]"/>
     </div>
 </template>

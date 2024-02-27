@@ -11,7 +11,7 @@ let textNoFound = ref<string>("")
 let displayOriginalBeers = ref<boolean>(true)
 let filteredBeers = reactive<BeerType[]>([])
 
-onMounted(store.setBeersFromData)
+onMounted(store.setAllBeersFromData)
 
 const callbackApplyFilter = (data: BeerType[]) => {
     textNoFound.value = data.length ? "" : "No beer found"
