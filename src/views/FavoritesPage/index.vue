@@ -1,25 +1,22 @@
 <script setup lang="ts">
-import {onMounted, ref, watch} from "vue";
+import BeerList from "../../components/beers/organisms/BeerList.vue";
 import {useBeerStore} from "../../stores/BeerStore.ts";
-import BeerList from "../HomePage/organisms/BeerList.vue";
+import {onMounted} from "vue";
+import {storeToRefs} from "pinia";
 
 const store = useBeerStore()
+const {favoriteBeers} = storeToRefs(store)
 
-let localFavorites = ref<number[]>(JSON.parse(localStorage.getItem("favorites") || "[]"))
-
-const updateFavorites = () => {
-    localFavorites.value = JSON.parse(localStorage.getItem("favorites") || "[]")
-}
-
-onMounted(() => store.setFavoritesBeersFromData(localFavorites.value))
-
-watch(localFavorites.value, (newValue) => store.setFavoritesBeersFromData(newValue))
+onMounted(() => {
+    store.fetchLocalFavorites()
+    store.fetchFavoritesFromData()
+})
 </script>
 
 <template>
     <h1>Favorites</h1>
     <BeerList
-        :list="store.favoriteBeers"
+        :list="favoriteBeers"
         :error="store.errorMessage"
         :loading="store.isLoading"
     />

@@ -3,15 +3,17 @@ import {useBeerStore} from "../../stores/BeerStore.ts";
 import {onMounted, reactive, ref} from "vue";
 import AppSearchBar from "../../components/searchbar/AppSearchBar.vue";
 import {BeerType} from "../../types/Beer.ts";
-import BeerList from "./organisms/BeerList.vue";
+import BeerList from "../../components/beers/organisms/BeerList.vue";
+import {storeToRefs} from "pinia";
 
 const store = useBeerStore()
+const {allBeers} = storeToRefs(store)
 
 let textNoFound = ref<string>("")
 let displayOriginalBeers = ref<boolean>(true)
 let filteredBeers = reactive<BeerType[]>([])
 
-onMounted(store.setAllBeersFromData)
+onMounted(store.fetchAllBeers)
 
 const callbackApplyFilter = (data: BeerType[]) => {
     textNoFound.value = data.length ? "" : "No beer found"
@@ -30,7 +32,7 @@ const callbackDisplayOriginalList = (state: boolean) => {
         <AppSearchBar
             placeholder="Rechercher une bière..."
             totalWidth="300px"
-            :list="store.allBeers"
+            :list="allBeers"
             @displayOriginalList="callbackDisplayOriginalList"
             @applyFilter="callbackApplyFilter"/>  <!-- TODO: Move to navbar -->
     </div>
@@ -39,7 +41,7 @@ const callbackDisplayOriginalList = (state: boolean) => {
         v-if="!textNoFound"
         :loading="store.isLoading"
         :error="store.errorMessage"
-        :list="displayOriginalBeers ? store.allBeers : filteredBeers"
+        :list="displayOriginalBeers ? allBeers : filteredBeers"
     />
 </template>
 

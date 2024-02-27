@@ -6,6 +6,8 @@ import AppButton from "../../../components/buttons/AppButton.vue";
 import {faHeart as faRegularHeart} from "@fortawesome/free-regular-svg-icons";
 import {faHeart as faSolidHeart} from "@fortawesome/free-solid-svg-icons";
 import {computed, ref} from "vue";
+import {useBeerStore} from "../../../stores/BeerStore.ts";
+import {storeToRefs} from "pinia";
 
 export interface BeerDetailsProps {
     beer: BeerType
@@ -15,12 +17,19 @@ export interface BeerDetailsProps {
 
 const props = defineProps<BeerDetailsProps>()
 
+const emit = defineEmits<{
+    addBeerToFavorites: []
+    removeBeerToFavorites: []
+}>()
+
+const store = useBeerStore()
+const {favoriteIdBeers} = storeToRefs(store)
+
+let isFavorited = ref<boolean>(favoriteIdBeers.value.includes(props.beer.id))
+let isHover = ref<boolean>(false)
+
 const WHITE: string = "var(--white)"
 const PINK: string = "#ff00e3"
-
-let favorites = ref<number[]>(JSON.parse(localStorage.getItem("favorites") || "[]"))
-let isFavorited = ref<boolean>(favorites && favorites.value.includes(props.beer.id))
-let isHover = ref<boolean>(false)
 
 const computeButtonStyle = computed(() =>
     isHover.value ?
@@ -28,33 +37,19 @@ const computeButtonStyle = computed(() =>
         `color: ${isFavorited.value ? PINK : WHITE};`
 )
 
-const addBeerToFavorites = () => {
-    favorites.value = [
-        ...favorites.value,
-        props.beer.id
-    ]
-}
-const removeBeerToFavorites = () => {
-    const index = favorites.value.indexOf(props.beer.id, 0);
-    if (index > -1) {
-        favorites.value.splice(index, 1);
-    }
-}
-
 const callbackDoAction = () => {
-    if (favorites.value.includes(props.beer.id)) {
-        removeBeerToFavorites()
+    if (isFavorited.value) {
         isFavorited.value = false
+        emit('removeBeerToFavorites')
     } else {
-        addBeerToFavorites()
         isFavorited.value = true
+        emit('addBeerToFavorites')
     }
-    localStorage.setItem("favorites", JSON.stringify(favorites.value));
 }
 </script>
 
 <template>
-    <div v-if="!loading" class="infos">
+    <div v-if="!loading && !error" class="infos">
         <BeerDetailsTitles :beer="beer"/>
         <div class="more">
             <span>Contributed by <span class="value">{{ beer.contributed_by }}</span></span>
@@ -68,7 +63,7 @@ const callbackDoAction = () => {
                 @doAction="callbackDoAction"
             />
         </div>
-        <section class="section description">
+        <section class="section">
             <h4 class="title">Description</h4>
             <span class="section-content">{{ beer.description }}</span>
         </section>

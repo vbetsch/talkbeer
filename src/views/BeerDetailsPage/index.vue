@@ -7,18 +7,31 @@ import {storeToRefs} from "pinia";
 import AppStateManagement from "../../components/states/molecules/AppStateManagement.vue";
 
 const store = useBeerStore()
-const {currentBeer} = storeToRefs(store)
+const {currentBeer, favoriteIdBeers} = storeToRefs(store)
 
 const beerId = router?.currentRoute?.value?.params?.beerId as string
 
-onMounted(() => store.setCurrentBeerFromData(beerId))
+onMounted(() => {
+    store.setCurrentBeerFromData(beerId)
+    store.fetchLocalFavorites()
+})
+
+const callbackAddBeerToFavorites = () => store.addBeerToFavorites(currentBeer.value.id)
+const callbackRemoveBeerToFavorites = () => store.removeBeerToFavorites(currentBeer.value.id)
 </script>
 
 <template>
     <AppStateManagement :loading="store.isLoading" :errorMessage="store.errorMessage"/>
     <div v-if="!store.isLoading && !store.errorMessage" class="content">
         <img class="image" :src="currentBeer.image_url" :alt="currentBeer.name">
-        <BeerDetails :beer="currentBeer" :error="store.errorMessage" :loading="store.isLoading"/>
+        <BeerDetails
+            :favorites="favoriteIdBeers"
+            :beer="currentBeer"
+            :error="store.errorMessage"
+            :loading="store.isLoading"
+            @addBeerToFavorites="callbackAddBeerToFavorites"
+            @removeBeerToFavorites="callbackRemoveBeerToFavorites"
+        />
     </div>
 </template>
 

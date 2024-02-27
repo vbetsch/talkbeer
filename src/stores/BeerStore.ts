@@ -3,15 +3,18 @@ import {reactive, ref} from "vue";
 import {BeerType} from "../types/Beer.ts";
 import {AxiosResponse} from "axios";
 import {getAllBeers, getBeersByID, getOneBeerByID} from "../queries/beersQueries.ts";
+import {addItemToArray, removeItemFromArray} from "./StoreService.ts";
 
 export const useBeerStore = defineStore('beers', () => {
-    let allBeers = reactive<BeerType[]>([]);
-    let favoriteBeers = reactive<BeerType[]>([]);
-    let currentBeer = reactive<BeerType>({} as BeerType);
     let isLoading = ref<boolean>(false);
     let errorMessage = ref<string>("");
+    let allBeers = reactive<BeerType[]>([]);
+    let favoriteBeers = reactive<BeerType[]>([]);
+    let favoriteIdBeers = reactive<number[]>([]);
+    let currentBeer = reactive<BeerType>({} as BeerType);
 
-    const setAllBeersFromData = async () => {
+    // ======================================= ALL BEERS =======================================
+    const fetchAllBeers = async () => {
         if (allBeers.length) {
             return
         }
@@ -21,25 +24,44 @@ export const useBeerStore = defineStore('beers', () => {
             Object.assign(allBeers, response.data);
             errorMessage.value = ''
         } catch (e: any) {
-            errorMessage.value = 'Error fetching data:' + e.message
+            errorMessage.value = 'Error fetching data: ' + e.message
             console.error(errorMessage.value);
         } finally {
             isLoading.value = false;
         }
     }
-    const setFavoritesBeersFromData = async (ids: number[]) => {
+
+    // ======================================= FAVORITES =======================================
+    const fetchLocalFavorites = () => {
+        const ids = JSON.parse(localStorage.getItem("favorites") || "[]")
+        favoriteIdBeers = Object.assign(favoriteIdBeers, ids);
+    }
+    const fetchFavoritesFromData = async () => {
         isLoading.value = true;
         try {
-            const response: AxiosResponse<BeerType[], any> = await getBeersByID(ids);
-            Object.assign(favoriteBeers, response.data);
+            // Recommended to use fetchLocalFavorites();
+            const response: AxiosResponse<BeerType[], any> = await getBeersByID(favoriteIdBeers);
+            favoriteBeers = Object.assign(favoriteBeers, response.data);
             errorMessage.value = ''
         } catch (e: any) {
-            errorMessage.value = 'Error fetching data:' + e.message
+            errorMessage.value = 'Error fetching data: ' + e.message
             console.error(errorMessage.value);
         } finally {
             isLoading.value = false;
         }
     }
+    const addBeerToFavorites = (beerId: number) => {
+        const ids = addItemToArray(beerId, JSON.parse(localStorage.getItem("favorites") || "[]"))
+        localStorage.setItem("favorites", JSON.stringify(ids));
+        favoriteIdBeers = Object.assign(favoriteIdBeers, ids);
+    }
+    const removeBeerToFavorites = (beerId: number) => {
+        const ids = removeItemFromArray(beerId, JSON.parse(localStorage.getItem("favorites") || "[]"))
+        localStorage.setItem("favorites", JSON.stringify(ids));
+        favoriteIdBeers = Object.assign(favoriteIdBeers, ids);
+    }
+
+    // ======================================= CURRENT BEER =======================================
     const setCurrentBeerFromData = async (beerId?: string) => {
         isLoading.value = true;
         try {
@@ -57,7 +79,7 @@ export const useBeerStore = defineStore('beers', () => {
             }
             errorMessage.value = ''
         } catch (e: any) {
-            errorMessage.value = 'Error fetching data:' + e.message
+            errorMessage.value = 'Error fetching data: ' + e.message
             console.error(errorMessage.value);
         } finally {
             isLoading.value = false;
@@ -67,11 +89,15 @@ export const useBeerStore = defineStore('beers', () => {
     return {
         allBeers,
         favoriteBeers,
+        favoriteIdBeers,
         currentBeer,
         isLoading,
         errorMessage,
-        setAllBeersFromData,
-        setFavoritesBeersFromData,
+        fetchAllBeers,
+        fetchLocalFavorites,
+        fetchFavoritesFromData,
+        addBeerToFavorites,
+        removeBeerToFavorites,
         setCurrentBeerFromData,
     }
 })
