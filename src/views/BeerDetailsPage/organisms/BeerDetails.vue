@@ -15,10 +15,18 @@ export interface BeerDetailsProps {
 
 const props = defineProps<BeerDetailsProps>()
 
-let favorites = ref<number[]>(JSON.parse(localStorage.getItem("favorites") || "[]"));
-let isFavorited = ref<boolean>(favorites && favorites.value.includes(props.beer.id))
+const WHITE: string = "var(--white)"
+const PINK: string = "#ff00e3"
 
-const computeButtonStyle = computed(() => `color: ${isFavorited.value ? "#ff00e3" : "var(--white)"};`)
+let favorites = ref<number[]>(JSON.parse(localStorage.getItem("favorites") || "[]"))
+let isFavorited = ref<boolean>(favorites && favorites.value.includes(props.beer.id))
+let isHover = ref<boolean>(false)
+
+const computeButtonStyle = computed(() =>
+    isHover.value ?
+        `color: ${isFavorited.value ? WHITE : PINK};` :
+        `color: ${isFavorited.value ? PINK : WHITE};`
+)
 
 const addBeerToFavorites = () => {
     favorites.value = [
@@ -55,6 +63,8 @@ const callbackDoAction = () => {
                 class="button"
                 :icon="isFavorited ? faSolidHeart : faRegularHeart"
                 :style="computeButtonStyle"
+                @mouseenter="isHover = true"
+                @mouseleave="isHover = false"
                 @doAction="callbackDoAction"
             />
         </div>
