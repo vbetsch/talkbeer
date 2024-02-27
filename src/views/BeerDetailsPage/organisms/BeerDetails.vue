@@ -14,10 +14,11 @@ export interface BeerDetailsProps {
 }
 
 const props = defineProps<BeerDetailsProps>()
-let favorites = ref<number[]>(JSON.parse(localStorage.getItem("favorites") || "[]"));
-let color = ref<string>(favorites && favorites.value.includes(props.beer.id) ? "#ff00e3" : "var(--white)")
 
-const computeButtonStyle = computed(() => `color: ${color.value};`)
+let favorites = ref<number[]>(JSON.parse(localStorage.getItem("favorites") || "[]"));
+let isFavorited = ref<boolean>(favorites && favorites.value.includes(props.beer.id))
+
+const computeButtonStyle = computed(() => `color: ${isFavorited.value ? "#ff00e3" : "var(--white)"};`)
 
 const addBeerToFavorites = () => {
     favorites.value = [
@@ -35,10 +36,10 @@ const removeBeerToFavorites = () => {
 const callbackDoAction = () => {
     if (favorites.value.includes(props.beer.id)) {
         removeBeerToFavorites()
-        color.value = "var(--white)"
+        isFavorited.value = false
     } else {
         addBeerToFavorites()
-        color.value = "#ff00e3"
+        isFavorited.value = true
     }
     localStorage.setItem("favorites", JSON.stringify(favorites.value));
 }
@@ -52,7 +53,7 @@ const callbackDoAction = () => {
             <span>First Brewed <span class="value">{{ beer.first_brewed }}</span></span>
             <AppButton
                 class="button"
-                :icon="favorites.includes(beer.id) ? faSolidHeart : faRegularHeart"
+                :icon="isFavorited ? faSolidHeart : faRegularHeart"
                 :style="computeButtonStyle"
                 @doAction="callbackDoAction"
             />
@@ -99,10 +100,6 @@ const callbackDoAction = () => {
 
 .more .button {
     background-color: #230033;
-}
-
-.more .button:hover {
-    color: #ff00e3 !important;
 }
 
 .section {
