@@ -2,8 +2,8 @@ import {defineStore} from "pinia";
 import {reactive, ref} from "vue";
 import {BeerType} from "../types/Beer.ts";
 import {AxiosResponse} from "axios";
-import {getAllBeers, getBeersByID, getOneBeerByID} from "../queries/beersQueries.ts";
 import {addItemToArray, removeItemFromArray} from "./StoreService.ts";
+import {getAllBeers, getBeersByID, getOneBeerByID} from "../data/queries/beersQueries.ts";
 
 export const useBeerStore = defineStore('beers', () => {
     let isLoading = ref<boolean>(false);
