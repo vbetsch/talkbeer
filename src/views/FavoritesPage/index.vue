@@ -14,7 +14,9 @@ onMounted(() => {
 </script>
 
 <template>
-    <h1>Favorites</h1>
+    <div class="title">
+        <h1 class="text">Favorites</h1>
+    </div>
     <BeerList
         :list="favoriteBeers"
         :error="store.errorMessage"
@@ -23,5 +25,15 @@ onMounted(() => {
 </template>
 
 <style scoped>
+.title {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 0 7vw 5vh 7vw;
+}
 
+.title .text {
+    font-weight: normal;
+    font-size: 3em;
+}
 </style>
