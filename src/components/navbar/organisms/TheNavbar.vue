@@ -17,6 +17,9 @@ import TheNavbarLinksList from "../molecules/TheNavbarLinksList.vue";
             {
                 page: 'Favorites'
             },
+            {
+                page: 'Login'
+            },
         ]"/>
     </div>
 </template>
@@ -26,7 +29,7 @@ import TheNavbarLinksList from "../molecules/TheNavbarLinksList.vue";
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 0 10px 2px rgb(194, 194, 194);
+    box-shadow: 0 0 10px 2px #ffcb89;
     padding: 2vh 15vw;
     position: fixed;
     background-color: white;

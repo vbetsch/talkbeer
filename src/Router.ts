@@ -18,5 +18,10 @@ export const router = createRouter({
             name: 'Favorites',
             component: () => import('./views/FavoritesPage/index.vue')
         },
+        {
+            path: '/login',
+            name: 'Login',
+            component: () => import('./views/AuthPage/index.vue')
+        },
     ]
 })

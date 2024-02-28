@@ -3,6 +3,7 @@ import BeerList from "../../components/beers/organisms/BeerList.vue";
 import {useBeerStore} from "../../stores/BeerStore.ts";
 import {onMounted} from "vue";
 import {storeToRefs} from "pinia";
+import AppTitle from "../../components/titles/AppTitle.vue";
 
 const store = useBeerStore()
 const {favoriteBeers} = storeToRefs(store)
@@ -14,9 +15,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="title">
-        <h1 class="text">Favorites</h1>
-    </div>
+    <AppTitle text="Favorites"/>
     <BeerList
         :list="favoriteBeers"
         :error="store.errorMessage"
@@ -25,15 +24,5 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.title {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    padding: 0 7vw 5vh 7vw;
-}
 
-.title .text {
-    font-weight: normal;
-    font-size: 3em;
-}
 </style>
