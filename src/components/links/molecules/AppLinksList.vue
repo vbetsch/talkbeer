@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import NavbarLink, {NavbarLinkProps} from "../atoms/NavbarLink.vue";
+import NavbarLink, {AppLinkProps} from "../atoms/AppLink.vue";
 
-export interface TheNavbarLinksListProps {
-    links: NavbarLinkProps[]
+export interface AppLinksListProps {
+    links: AppLinkProps[]
 }
 
-const props = defineProps<TheNavbarLinksListProps>()
+const props = defineProps<AppLinksListProps>()
 </script>
 
 <template>

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-export interface NavbarLinkProps {
+export interface AppLinkProps {
     page: string
     label?: string
 }
 
-const props = defineProps<NavbarLinkProps>()
+const props = defineProps<AppLinkProps>()
 </script>
 
 <template>

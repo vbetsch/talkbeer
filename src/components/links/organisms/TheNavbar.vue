@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import TheNavbarLinksList from "../molecules/TheNavbarLinksList.vue";
+import TheNavbarLinksList from "../molecules/AppLinksList.vue";
 </script>
 
 <template>
@@ -15,7 +15,7 @@ import TheNavbarLinksList from "../molecules/TheNavbarLinksList.vue";
                 page: 'Favorites'
             },
             {
-                page: 'Login'
+                page: 'Profile'
             },
         ]"/>
     </div>

@@ -7,11 +7,8 @@ const props = defineProps<AppErrorMessageProps>()
 </script>
 
 <template>
-    <span v-if="error" class="text">{{ error }}</span>
+    <span v-if="error" class="error">{{ error }}</span>
 </template>
 
 <style scoped>
-.text {
-    color: red;
-}
 </style>

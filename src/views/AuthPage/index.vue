@@ -28,11 +28,9 @@ const fields: AppFieldProps[] = [
 ]
 
 const callbackSubmitValues = async (mapping: AuthCredentialsType) => {
-    try {
-        await store.signInUser(mapping)
+    const result = await store.signInUser(mapping)
+    if (result) {
         await router.push("profile")
-    } catch (e) {
-        console.error(e);
     }
 }
 </script>
@@ -42,8 +40,12 @@ const callbackSubmitValues = async (mapping: AuthCredentialsType) => {
     <div class="card-container">
         <div class="card-content">
             <AppTitle text="Login"/>
-            <AppForm :fields="fields" @submitValues="callbackSubmitValues"/>
-            <AppStateManagement :loading="store.isLoading" :error-message="store.errorMessage"/>
+            <AppForm
+                :fields="fields"
+                :loading="store.isLoading"
+                :error="store.errorMessage"
+                @submitValues="callbackSubmitValues"
+            />
         </div>
     </div>
 </template>

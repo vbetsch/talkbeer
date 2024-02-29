@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import AppField, {AppFieldProps} from "../molecules/AppField.vue";
 import {reactive} from "vue";
+import AppStateManagement from "../../states/molecules/AppStateManagement.vue";
 
 export interface AppFormProps {
     fields: AppFieldProps[]
+    loading: boolean
+    error: string
 }
 
 const props = defineProps<AppFormProps>()
@@ -36,6 +39,9 @@ const callbackChangeValue = (keyName: string, value: string) => {
                 :required="field.required"
                 @changeValue="callbackChangeValue"
             />
+        </div>
+        <div class="app-state-management">
+            <AppStateManagement :loading="loading" :error-message="error"/>
         </div>
         <input
             class="form-button"
@@ -75,5 +81,10 @@ const callbackChangeValue = (keyName: string, value: string) => {
     background-color: var(--black);
     border-color: var(--black);
     color: var(--white);
+}
+
+.app-state-management {
+    width: 250px;
+    overflow: hidden;
 }
 </style>
