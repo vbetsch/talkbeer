@@ -16,7 +16,6 @@ let mapping = reactive({} as any)
 
 const onSubmit = (e: Event) => {
     e.preventDefault();
-    console.log("(29/02/2024 00:08)  @reyks  [ AppForm.vue:19 -  - onSubmit ]  ");
     emit('submitValues', mapping)
 }
 

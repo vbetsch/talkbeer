@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import TheNavbarLinksList from "../molecules/TheNavbarLinksList.vue";
-// import AppSearchBar from "../../searchbar/AppSearchBar.vue";
 </script>
 
 <template>
@@ -8,8 +7,6 @@ import TheNavbarLinksList from "../molecules/TheNavbarLinksList.vue";
         <router-link class="link" :to="{ name: 'Home' }">
             <img class="logo" src="/img/talkbeer.png" alt="logo">
         </router-link>
-        <!-- TODO: Put search bar here -->
-        <!-- <AppSearchBar placeholder="Rechercher une bière..."/>-->
         <TheNavbarLinksList :links="[
             {
                 page: 'Home'

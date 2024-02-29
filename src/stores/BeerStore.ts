@@ -2,8 +2,8 @@ import {defineStore} from "pinia";
 import {reactive, ref} from "vue";
 import {BeerType} from "../types/Beer.ts";
 import {AxiosResponse} from "axios";
-import {addItemToArray, removeItemFromArray} from "./StoreService.ts";
 import {getAllBeers, getBeersByID, getOneBeerByID} from "../data/queries/beersQueries.ts";
+import {addItemToArray, removeItemFromArray} from "../services/ArrayService.ts";
 
 export const useBeerStore = defineStore('beers', () => {
     let isLoading = ref<boolean>(false);
@@ -87,12 +87,12 @@ export const useBeerStore = defineStore('beers', () => {
     }
 
     return {
+        isLoading,
+        errorMessage,
         allBeers,
         favoriteBeers,
         favoriteIdBeers,
         currentBeer,
-        isLoading,
-        errorMessage,
         fetchAllBeers,
         fetchLocalFavorites,
         fetchFavoritesFromData,

@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import AppTitle from "../../components/titles/AppTitle.vue";
-import {ref} from "vue";
 import AppForm from "../../components/form/organisms/AppForm.vue";
 import {AppFieldProps} from "../../components/form/molecules/AppField.vue";
 import {FieldTypeSupported} from "../../types/FieldTypeSupported.ts";
+import {AuthCredentialsType} from "../../types/Auth.ts";
+import AppStateManagement from "../../components/states/molecules/AppStateManagement.vue";
+import {useAuthStore} from "../../stores/AuthStore.ts";
+import {router} from "../../Router.ts";
 
-let emailInput = ref<string>()
-let passwordInput = ref<string>()
+const store = useAuthStore();
 
 const fields: AppFieldProps[] = [
     {
@@ -25,9 +27,13 @@ const fields: AppFieldProps[] = [
     }
 ]
 
-const callbackSubmitValues = (mapping: { email: string, password: string }) => {
-    emailInput.value = mapping.email
-    passwordInput.value = mapping.password
+const callbackSubmitValues = async (mapping: AuthCredentialsType) => {
+    try {
+        await store.signInUser(mapping)
+        await router.push("profile")
+    } catch (e) {
+        console.error(e);
+    }
 }
 </script>
 
@@ -37,6 +43,7 @@ const callbackSubmitValues = (mapping: { email: string, password: string }) => {
         <div class="card-content">
             <AppTitle text="Login"/>
             <AppForm :fields="fields" @submitValues="callbackSubmitValues"/>
+            <AppStateManagement :loading="store.isLoading" :error-message="store.errorMessage"/>
         </div>
     </div>
 </template>
