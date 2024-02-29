@@ -1,3 +1,7 @@
-export const replaceTo = (target: any, source: any) => {
+const replaceObjectTo = (target: any, source: any) => {
     return Object.assign(target, source);
+}
+
+export {
+    replaceObjectTo
 }

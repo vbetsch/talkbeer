@@ -5,6 +5,7 @@ import AppSearchBar from "../../components/searchbar/AppSearchBar.vue";
 import {BeerType} from "../../types/Beer.ts";
 import BeerList from "../../components/beers/organisms/BeerList.vue";
 import {storeToRefs} from "pinia";
+import {replaceArrayTo} from "../../services/ArrayService.ts";
 
 const store = useBeerStore()
 const {allBeers} = storeToRefs(store)
@@ -17,9 +18,7 @@ onMounted(store.fetchAllBeers)
 
 const callbackApplyFilter = (data: BeerType[]) => {
     textNoFound.value = data.length ? "" : "No beer found"
-    filteredBeers = [
-        ...data
-    ]
+    filteredBeers = replaceArrayTo(data)
 }
 
 const callbackDisplayOriginalList = (state: boolean) => {
