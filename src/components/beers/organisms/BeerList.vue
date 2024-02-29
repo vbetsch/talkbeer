@@ -9,7 +9,7 @@ export interface BeerListProps {
     error: string
 }
 
-const props = defineProps<BeerListProps>()
+defineProps<BeerListProps>()
 </script>
 
 <template>

@@ -3,7 +3,7 @@ export interface AppTitleProps {
     text: string
 }
 
-const props = defineProps<AppTitleProps>()
+defineProps<AppTitleProps>()
 </script>
 
 <template>

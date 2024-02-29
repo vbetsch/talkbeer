@@ -3,7 +3,7 @@ export interface AppErrorMessageProps {
     error: string
 }
 
-const props = defineProps<AppErrorMessageProps>()
+defineProps<AppErrorMessageProps>()
 </script>
 
 <template>

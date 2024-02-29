@@ -5,7 +5,7 @@ export interface BeerDetailsTitlesProps {
     beer: BeerType
 }
 
-const props = defineProps<BeerDetailsTitlesProps>()
+defineProps<BeerDetailsTitlesProps>()
 </script>
 
 <template>

@@ -7,7 +7,7 @@ export interface AppStateManagementProps {
     errorMessage?: string
 }
 
-const props = defineProps<AppStateManagementProps>()
+defineProps<AppStateManagementProps>()
 </script>
 
 <template>

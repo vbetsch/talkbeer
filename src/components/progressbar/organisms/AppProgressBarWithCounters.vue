@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import AppProgressBar, {AppProgressBarProps} from "../molecules/AppProgressBar.vue";
-import {computed, getCurrentInstance, onMounted, ref} from "vue";
+import {getCurrentInstance, onMounted, ref} from "vue";
 import {checkProgressBar} from "../../ComponentErrorManager.ts";
 
 export interface AppProgressBarWithCountersProps extends AppProgressBarProps {
