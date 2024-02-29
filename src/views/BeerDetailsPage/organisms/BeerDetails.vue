@@ -5,9 +5,11 @@ import BeerDetailsTitles from "../molecules/BeerDetailsTitles.vue";
 import AppButton from "../../../components/buttons/AppButton.vue";
 import {faHeart as faRegularHeart} from "@fortawesome/free-regular-svg-icons";
 import {faHeart as faSolidHeart} from "@fortawesome/free-solid-svg-icons";
-import {computed, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import {useBeerStore} from "../../../stores/BeerStore.ts";
 import {storeToRefs} from "pinia";
+import PostsList from "../molecules/PostsList.vue";
+import {usePostStore} from "../../../stores/PostStore.ts";
 
 export interface BeerDetailsProps {
     beer: BeerType
@@ -22,8 +24,11 @@ const emit = defineEmits<{
     removeBeerToFavorites: []
 }>()
 
-const store = useBeerStore()
-const {favoriteIdBeers} = storeToRefs(store)
+const beerStore = useBeerStore()
+const {favoriteIdBeers} = storeToRefs(beerStore)
+
+const postStore = usePostStore()
+const {currentPosts} = storeToRefs(postStore)
 
 let isFavorited = ref<boolean>(favoriteIdBeers.value.includes(props.beer.id))
 let isHover = ref<boolean>(false)
@@ -71,6 +76,12 @@ const callbackDoAction = () => {
             <h4 class="title">Details</h4>
             <div class="section-content">
                 <BeerDetailsInfos :loading="loading" :error="error" :beer="beer"/>
+            </div>
+        </section>
+        <section class="section">
+            <h4 class="title">Avis</h4>
+            <div>
+                <PostsList :list="currentPosts"/>
             </div>
         </section>
     </div>

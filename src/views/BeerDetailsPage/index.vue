@@ -5,30 +5,34 @@ import BeerDetails from "./organisms/BeerDetails.vue";
 import {useBeerStore} from "../../stores/BeerStore.ts";
 import {storeToRefs} from "pinia";
 import AppStateManagement from "../../components/states/molecules/AppStateManagement.vue";
+import {usePostStore} from "../../stores/PostStore.ts";
 
-const store = useBeerStore()
-const {currentBeer, favoriteIdBeers} = storeToRefs(store)
+const beerStore = useBeerStore()
+const {currentBeer, favoriteIdBeers} = storeToRefs(beerStore)
+
+const postStore = usePostStore()
 
 const beerId = router?.currentRoute?.value?.params?.beerId as string
 
 onMounted(() => {
-    store.setCurrentBeerFromData(beerId)
-    store.fetchLocalFavorites()
+    beerStore.setCurrentBeerFromData(beerId)
+    postStore.fetchPostsByBeer(beerId)
+    beerStore.fetchLocalFavorites()
 })
 
-const callbackAddBeerToFavorites = () => store.addBeerToFavorites(currentBeer.value.id)
-const callbackRemoveBeerToFavorites = () => store.removeBeerToFavorites(currentBeer.value.id)
+const callbackAddBeerToFavorites = () => beerStore.addBeerToFavorites(currentBeer.value.id)
+const callbackRemoveBeerToFavorites = () => beerStore.removeBeerToFavorites(currentBeer.value.id)
 </script>
 
 <template>
-    <AppStateManagement :loading="store.isLoading" :errorMessage="store.errorMessage"/>
-    <div v-if="!store.isLoading && !store.errorMessage" class="content">
+    <AppStateManagement :loading="beerStore.isLoading" :errorMessage="beerStore.errorMessage"/>
+    <div v-if="!beerStore.isLoading && !beerStore.errorMessage" class="content">
         <img class="image" :src="currentBeer.image_url" :alt="currentBeer.name">
         <BeerDetails
             :favorites="favoriteIdBeers"
             :beer="currentBeer"
-            :error="store.errorMessage"
-            :loading="store.isLoading"
+            :error="beerStore.errorMessage"
+            :loading="beerStore.isLoading"
             @addBeerToFavorites="callbackAddBeerToFavorites"
             @removeBeerToFavorites="callbackRemoveBeerToFavorites"
         />
