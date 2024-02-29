@@ -4,9 +4,10 @@ import AppForm from "../../components/form/organisms/AppForm.vue";
 import {AppFieldProps} from "../../components/form/molecules/AppField.vue";
 import {FieldTypeSupported} from "../../types/FieldTypeSupported.ts";
 import {AuthCredentialsType} from "../../types/Auth.ts";
-import AppStateManagement from "../../components/states/molecules/AppStateManagement.vue";
 import {useAuthStore} from "../../stores/AuthStore.ts";
 import {router} from "../../Router.ts";
+import AppLink from "../../components/links/atoms/AppLink.vue";
+import AppSubLink from "../../components/links/molecules/AppSubLink.vue";
 
 const store = useAuthStore();
 
@@ -46,6 +47,10 @@ const callbackSubmitValues = async (mapping: AuthCredentialsType) => {
                 :error="store.errorMessage"
                 @submitValues="callbackSubmitValues"
             />
+            <AppSubLink before-text="Don't have an account yet? Go to the" after-text="page" :link="{
+                page: 'Register',
+                label: 'register'
+            }"/>
         </div>
     </div>
 </template>
@@ -67,5 +72,14 @@ const callbackSubmitValues = async (mapping: AuthCredentialsType) => {
 
 .title {
     padding: 0 7vw 2vh 7vw;
+}
+
+.sublink {
+    display: flex;
+    gap: 5px;
+    color: var(--grey);
+}
+.sublink .link {
+    color: blue;
 }
 </style>
