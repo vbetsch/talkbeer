@@ -85,9 +85,7 @@ const callbackDoAction = () => {
         <BeerDetailsSection subtitle="Details">
             <BeerDetailsInfos :loading="loading" :error="error" :beer="beer"/>
         </BeerDetailsSection>
-        <BeerDetailsSection subtitle="Avis">
-            <PostsList :list="currentPosts"/>
-        </BeerDetailsSection>
+        <PostsList :list="currentPosts"/>
     </div>
 </template>
 

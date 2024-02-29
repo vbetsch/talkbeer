@@ -26,7 +26,6 @@ const props = defineProps<PostItemProps>()
     display: flex;
     justify-content: start;
     align-items: center;
-    padding: 20px;
     gap: 15px;
 }
 
