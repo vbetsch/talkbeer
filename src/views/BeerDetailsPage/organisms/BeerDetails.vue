@@ -5,7 +5,7 @@ import BeerDetailsTitles from "../molecules/BeerDetailsTitles.vue";
 import AppButton from "../../../components/buttons/AppButton.vue";
 import {faHeart as faRegularHeart} from "@fortawesome/free-regular-svg-icons";
 import {faHeart as faSolidHeart} from "@fortawesome/free-solid-svg-icons";
-import {computed, onMounted, ref} from "vue";
+import {computed, ref} from "vue";
 import {useBeerStore} from "../../../stores/BeerStore.ts";
 import {storeToRefs} from "pinia";
 import InfoList from "../../../components/text/molecules/InfoList.vue";

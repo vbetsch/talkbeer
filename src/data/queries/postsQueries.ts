@@ -18,7 +18,7 @@ export const getPosts = async () => {
     }
 };
 
-export const getPostsByBeer = async (beerId: string) => {
+export const getPostsByBeer = async (beerId: number) => {
     try {
         const querySnapshot = await getDocs(
             query(

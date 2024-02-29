@@ -28,7 +28,7 @@ export const usePostStore = defineStore('posts', () => {
     const fetchPostsByBeer = async (beerId: string) => {
         isLoading.value = true;
         try {
-            const posts = await getPostsByBeer(beerId);
+            const posts = await getPostsByBeer(parseInt(beerId));
             Object.assign(currentPosts, posts);
             errorMessage.value = ''
         } catch (e: any) {
