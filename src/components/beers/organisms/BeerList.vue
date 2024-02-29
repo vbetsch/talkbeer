@@ -14,8 +14,11 @@ const props = defineProps<BeerListProps>()
 
 <template>
     <AppStateManagement :loading="loading" :errorMessage="error"/>
-    <div v-if="!loading && !error" class="beers">
+    <div v-if="!loading && !error && list.length" class="beers">
         <BeerItem :beer="beer" v-for="beer in list.sort((beerA, beerB) => beerA.name.localeCompare(beerB.name))"/>
+    </div>
+    <div v-if="!loading && !error && !list.length">
+        <span>No beer found</span>
     </div>
 </template>
 
