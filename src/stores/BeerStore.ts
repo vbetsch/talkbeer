@@ -4,6 +4,7 @@ import {BeerType} from "../types/Beer.ts";
 import {AxiosResponse} from "axios";
 import {getAllBeers, getBeersByID, getOneBeerByID} from "../data/queries/beersQueries.ts";
 import {addItemToArray, removeItemFromArray} from "../services/ArrayService.ts";
+import {replaceTo} from "../services/ObjectService.ts";
 
 export const useBeerStore = defineStore('beers', () => {
     let isLoading = ref<boolean>(false);
@@ -21,7 +22,7 @@ export const useBeerStore = defineStore('beers', () => {
         isLoading.value = true;
         try {
             const response: AxiosResponse<BeerType[], any> = await getAllBeers();
-            Object.assign(allBeers, response.data);
+            allBeers = replaceTo(allBeers, response.data)
             errorMessage.value = ''
         } catch (e: any) {
             errorMessage.value = 'Error fetching data: ' + e.message
@@ -34,14 +35,14 @@ export const useBeerStore = defineStore('beers', () => {
     // ======================================= FAVORITES =======================================
     const fetchLocalFavorites = () => {
         const ids = JSON.parse(localStorage.getItem("favorites") || "[]")
-        favoriteIdBeers = Object.assign(favoriteIdBeers, ids);
+        favoriteIdBeers = replaceTo(favoriteIdBeers, ids);
     }
     const fetchFavoritesFromData = async () => {
         isLoading.value = true;
         try {
             // Recommended to use fetchLocalFavorites();
             const response: AxiosResponse<BeerType[], any> = await getBeersByID(favoriteIdBeers);
-            favoriteBeers = Object.assign(favoriteBeers, response.data);
+            favoriteBeers = replaceTo(favoriteBeers, response.data);
             errorMessage.value = ''
         } catch (e: any) {
             errorMessage.value = 'Error fetching data: ' + e.message
@@ -53,12 +54,12 @@ export const useBeerStore = defineStore('beers', () => {
     const addBeerToFavorites = (beerId: number) => {
         const ids = addItemToArray(beerId, JSON.parse(localStorage.getItem("favorites") || "[]"))
         localStorage.setItem("favorites", JSON.stringify(ids));
-        favoriteIdBeers = Object.assign(favoriteIdBeers, ids);
+        favoriteIdBeers = replaceTo(favoriteIdBeers, ids);
     }
     const removeBeerToFavorites = (beerId: number) => {
         const ids = removeItemFromArray(beerId, JSON.parse(localStorage.getItem("favorites") || "[]"))
         localStorage.setItem("favorites", JSON.stringify(ids));
-        favoriteIdBeers = Object.assign(favoriteIdBeers, ids);
+        favoriteIdBeers = replaceTo(favoriteIdBeers, ids);
     }
 
     // ======================================= CURRENT BEER =======================================
@@ -75,7 +76,7 @@ export const useBeerStore = defineStore('beers', () => {
             }
             const {data}: { data: BeerType[] } = await getOneBeerByID(beerId);
             if (data?.length) {
-                Object.assign(currentBeer, data[0]);
+                replaceTo(currentBeer, data[0]);
             }
             errorMessage.value = ''
         } catch (e: any) {
