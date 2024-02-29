@@ -5,6 +5,7 @@ import {AxiosResponse} from "axios";
 import {getAllBeers, getBeersByID, getOneBeerByID} from "../data/queries/beersQueries.ts";
 import {addItemToArray, removeItemFromArray} from "../services/ArrayService.ts";
 import {replaceTo} from "../services/ObjectService.ts";
+import {getLocalStorageValue, LocalStorageKeys, setLocalStorageValue} from "../services/LocalStorageService.ts";
 
 export const useBeerStore = defineStore('beers', () => {
     let isLoading = ref<boolean>(false);
@@ -34,7 +35,7 @@ export const useBeerStore = defineStore('beers', () => {
 
     // ======================================= FAVORITES =======================================
     const fetchLocalFavorites = () => {
-        const ids = JSON.parse(localStorage.getItem("favorites") || "[]")
+        const ids = getLocalStorageValue(LocalStorageKeys.FAVORITES, "[]")
         favoriteIdBeers = replaceTo(favoriteIdBeers, ids);
     }
     const fetchFavoritesFromData = async () => {
@@ -52,13 +53,13 @@ export const useBeerStore = defineStore('beers', () => {
         }
     }
     const addBeerToFavorites = (beerId: number) => {
-        const ids = addItemToArray(beerId, JSON.parse(localStorage.getItem("favorites") || "[]"))
-        localStorage.setItem("favorites", JSON.stringify(ids));
+        const ids = addItemToArray(beerId,  getLocalStorageValue(LocalStorageKeys.FAVORITES, "[]"))
+        setLocalStorageValue(LocalStorageKeys.FAVORITES, ids);
         favoriteIdBeers = replaceTo(favoriteIdBeers, ids);
     }
     const removeBeerToFavorites = (beerId: number) => {
-        const ids = removeItemFromArray(beerId, JSON.parse(localStorage.getItem("favorites") || "[]"))
-        localStorage.setItem("favorites", JSON.stringify(ids));
+        const ids = removeItemFromArray(beerId, getLocalStorageValue(LocalStorageKeys.FAVORITES, "[]"))
+        setLocalStorageValue(LocalStorageKeys.FAVORITES, ids);
         favoriteIdBeers = replaceTo(favoriteIdBeers, ids);
     }
 
