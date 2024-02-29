@@ -9,6 +9,7 @@ import {computed, ref} from "vue";
 import {useBeerStore} from "../../../stores/BeerStore.ts";
 import {storeToRefs} from "pinia";
 import InfoList from "../../../components/text/molecules/InfoList.vue";
+import BeerDetailsSection from "../molecules/BeerDetailsSection.vue";
 
 export interface BeerDetailsProps {
     beer: BeerType
@@ -72,16 +73,12 @@ const callbackDoAction = () => {
                 @doAction="callbackDoAction"
             />
         </div>
-        <section class="section">
-            <h4 class="title">Description</h4>
-            <span class="section-content">{{ beer.description }}</span>
-        </section>
-        <section class="section">
-            <h4 class="title">Details</h4>
-            <div class="section-content">
-                <BeerDetailsInfos :loading="loading" :error="error" :beer="beer"/>
-            </div>
-        </section>
+        <BeerDetailsSection subtitle="Description">
+            {{ beer.description }}
+        </BeerDetailsSection>
+        <BeerDetailsSection subtitle="Details">
+            <BeerDetailsInfos :loading="loading" :error="error" :beer="beer"/>
+        </BeerDetailsSection>
     </div>
 </template>
 
@@ -93,13 +90,6 @@ const callbackDoAction = () => {
     gap: 30px;
 }
 
-.section-content {
-    font-size: 1.2em;
-    text-justify: auto;
-    border-left: 1px solid var(--light-grey);
-    padding-left: 20px;
-}
-
 .more {
     display: flex;
     align-items: center;
@@ -108,18 +98,5 @@ const callbackDoAction = () => {
 
 .more .button {
     background-color: #230033;
-}
-
-.section {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5em;
-}
-
-.title {
-    text-transform: uppercase;
-    font-weight: normal;
-    color: var(--grey);
-    font-size: 14px;
 }
 </style>
