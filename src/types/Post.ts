@@ -4,6 +4,7 @@ export interface PostDocument {
     beerId: number
     content: string
     likes: number
+    stars: number
 }
 export interface InitialPostData {
     likes: number
