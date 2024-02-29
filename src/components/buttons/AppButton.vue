@@ -9,7 +9,7 @@ export interface ButtonProps {
     iconHover?: IconDefinition
 }
 
-const props = withDefaults(defineProps<ButtonProps>(), {})
+const props = defineProps<ButtonProps>()
 
 let currentIcon = ref<IconDefinition | undefined>(props.icon)
 

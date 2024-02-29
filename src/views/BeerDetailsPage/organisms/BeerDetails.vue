@@ -8,6 +8,7 @@ import {faHeart as faSolidHeart} from "@fortawesome/free-solid-svg-icons";
 import {computed, ref} from "vue";
 import {useBeerStore} from "../../../stores/BeerStore.ts";
 import {storeToRefs} from "pinia";
+import InfoList from "../../../components/text/molecules/InfoList.vue";
 
 export interface BeerDetailsProps {
     beer: BeerType
@@ -52,8 +53,16 @@ const callbackDoAction = () => {
     <div v-if="!loading && !error" class="infos">
         <BeerDetailsTitles :beer="beer"/>
         <div class="more">
-            <span>Contributed by <span class="value">{{ beer.contributed_by }}</span></span>
-            <span>First Brewed <span class="value">{{ beer.first_brewed }}</span></span>
+            <InfoList :list="[
+                {
+                    title: 'Contributed by',
+                    value: beer.contributed_by
+                },
+                {
+                    title: 'First Brewed',
+                    value: beer.first_brewed
+                },
+            ]"/>
             <AppButton
                 class="button"
                 :icon="isFavorited ? faSolidHeart : faRegularHeart"
@@ -95,12 +104,6 @@ const callbackDoAction = () => {
     display: flex;
     align-items: center;
     gap: 30px;
-    color: var(--grey);
-}
-
-.more .value {
-    color: var(--black);
-    font-weight: normal;
 }
 
 .more .button {
