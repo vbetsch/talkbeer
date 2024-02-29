@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import TheNavbarLinksList from "../molecules/TheNavbarLinksList.vue";
-// import AppSearchBar from "../../searchbar/AppSearchBar.vue";
+import TheNavbarLinksList from "../molecules/AppLinksList.vue";
 </script>
 
 <template>
@@ -8,14 +7,15 @@ import TheNavbarLinksList from "../molecules/TheNavbarLinksList.vue";
         <router-link class="link" :to="{ name: 'Home' }">
             <img class="logo" src="/img/talkbeer.png" alt="logo">
         </router-link>
-        <!-- TODO: Put search bar here -->
-        <!-- <AppSearchBar placeholder="Rechercher une bière..."/>-->
         <TheNavbarLinksList :links="[
             {
                 page: 'Home'
             },
             {
                 page: 'Favorites'
+            },
+            {
+                page: 'Profile'
             },
         ]"/>
     </div>
@@ -26,7 +26,7 @@ import TheNavbarLinksList from "../molecules/TheNavbarLinksList.vue";
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 0 10px 2px rgb(194, 194, 194);
+    box-shadow: 0 0 10px 2px #ffcb89;
     padding: 2vh 15vw;
     position: fixed;
     background-color: white;

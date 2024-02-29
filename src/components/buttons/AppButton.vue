@@ -46,6 +46,7 @@ const onMouseLeave = () => {
 
 <style scoped>
 .button {
+    width: fit-content;
     display: flex;
     height: fit-content;
     justify-content: center;
