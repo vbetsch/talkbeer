@@ -3,7 +3,7 @@ export interface AppLoadingProps {
     loading: boolean
 }
 
-const props = defineProps<AppLoadingProps>()
+defineProps<AppLoadingProps>()
 </script>
 
 <template>

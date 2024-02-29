@@ -2,6 +2,7 @@
 import BeerItem from "../molecules/BeerItem.vue";
 import AppStateManagement from "../../../components/states/molecules/AppStateManagement.vue";
 import {BeerType} from "../../../types/Beer.ts";
+import AppDefaultText from "../../states/atoms/AppDefaultText.vue";
 
 export interface BeerListProps {
     list: BeerType[]
@@ -9,7 +10,7 @@ export interface BeerListProps {
     error: string
 }
 
-const props = defineProps<BeerListProps>()
+defineProps<BeerListProps>()
 </script>
 
 <template>
@@ -18,7 +19,7 @@ const props = defineProps<BeerListProps>()
         <BeerItem :beer="beer" v-for="beer in list.sort((beerA, beerB) => beerA.name.localeCompare(beerB.name))"/>
     </div>
     <div v-if="!loading && !error && !list.length">
-        <span>No beer found</span>
+        <AppDefaultText text="No beer found"/>
     </div>
 </template>
 

@@ -10,9 +10,6 @@ export const useAuthStore = defineStore('auth', () => {
 
     // ======================================= AUTHENTICATION =======================================
     const signInUser = async (data: AuthCredentialsType) => {
-        if (auth.currentUser) {
-            return
-        }
         isLoading.value = true;
         try {
             const {user, error} = await signIn(data);

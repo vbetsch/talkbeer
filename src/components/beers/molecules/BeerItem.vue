@@ -7,7 +7,7 @@ export interface BeerItemProps {
     beer?: BeerType
 }
 
-const props = defineProps<BeerItemProps>()
+defineProps<BeerItemProps>()
 
 const clickOnBeer = (id: number) => {
     router.push({

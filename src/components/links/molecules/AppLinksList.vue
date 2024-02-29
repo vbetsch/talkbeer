@@ -5,7 +5,7 @@ export interface AppLinksListProps {
     links: AppLinkProps[]
 }
 
-const props = defineProps<AppLinksListProps>()
+defineProps<AppLinksListProps>()
 </script>
 
 <template>

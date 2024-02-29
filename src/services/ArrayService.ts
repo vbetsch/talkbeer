@@ -1,3 +1,9 @@
+const replaceArrayTo = (array: Array<any>) => {
+    return [
+        ...array
+    ]
+}
+
 const addItemToArray = (item: any, array: Array<any>) => {
     if (array.includes(item)) {
         return array
@@ -18,6 +24,7 @@ const removeItemFromArray = (item: any, array: Array<any>) => {
 }
 
 export {
+    replaceArrayTo,
     addItemToArray,
     removeItemFromArray
 }

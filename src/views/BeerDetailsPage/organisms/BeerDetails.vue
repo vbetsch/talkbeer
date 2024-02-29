@@ -8,8 +8,11 @@ import {faHeart as faSolidHeart} from "@fortawesome/free-solid-svg-icons";
 import {computed, onMounted, ref} from "vue";
 import {useBeerStore} from "../../../stores/BeerStore.ts";
 import {storeToRefs} from "pinia";
+import InfoList from "../../../components/text/molecules/InfoList.vue";
+import BeerDetailsSection from "../molecules/BeerDetailsSection.vue";
 import PostsList from "../molecules/PostsList.vue";
 import {usePostStore} from "../../../stores/PostStore.ts";
+
 
 export interface BeerDetailsProps {
     beer: BeerType
@@ -57,8 +60,16 @@ const callbackDoAction = () => {
     <div v-if="!loading && !error" class="infos">
         <BeerDetailsTitles :beer="beer"/>
         <div class="more">
-            <span>Contributed by <span class="value">{{ beer.contributed_by }}</span></span>
-            <span>First Brewed <span class="value">{{ beer.first_brewed }}</span></span>
+            <InfoList :list="[
+                {
+                    title: 'Contributed by',
+                    value: beer.contributed_by
+                },
+                {
+                    title: 'First Brewed',
+                    value: beer.first_brewed
+                },
+            ]"/>
             <AppButton
                 class="button"
                 :icon="isFavorited ? faSolidHeart : faRegularHeart"
@@ -68,22 +79,15 @@ const callbackDoAction = () => {
                 @doAction="callbackDoAction"
             />
         </div>
-        <section class="section">
-            <h4 class="title">Description</h4>
-            <span class="section-content">{{ beer.description }}</span>
-        </section>
-        <section class="section">
-            <h4 class="title">Details</h4>
-            <div class="section-content">
-                <BeerDetailsInfos :loading="loading" :error="error" :beer="beer"/>
-            </div>
-        </section>
-        <section class="section">
-            <h4 class="title">Avis</h4>
-            <div>
-                <PostsList :list="currentPosts"/>
-            </div>
-        </section>
+        <BeerDetailsSection subtitle="Description">
+            {{ beer.description }}
+        </BeerDetailsSection>
+        <BeerDetailsSection subtitle="Details">
+            <BeerDetailsInfos :loading="loading" :error="error" :beer="beer"/>
+        </BeerDetailsSection>
+        <BeerDetailsSection subtitle="Avis">
+            <PostsList :list="currentPosts"/>
+        </BeerDetailsSection>
     </div>
 </template>
 
@@ -95,39 +99,13 @@ const callbackDoAction = () => {
     gap: 30px;
 }
 
-.section-content {
-    font-size: 1.2em;
-    text-justify: auto;
-    border-left: 1px solid var(--light-grey);
-    padding-left: 20px;
-}
-
 .more {
     display: flex;
     align-items: center;
     gap: 30px;
-    color: var(--grey);
-}
-
-.more .value {
-    color: var(--black);
-    font-weight: normal;
 }
 
 .more .button {
     background-color: #230033;
-}
-
-.section {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5em;
-}
-
-.title {
-    text-transform: uppercase;
-    font-weight: normal;
-    color: var(--grey);
-    font-size: 14px;
 }
 </style>

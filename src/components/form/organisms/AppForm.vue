@@ -9,7 +9,7 @@ export interface AppFormProps {
     error: string
 }
 
-const props = defineProps<AppFormProps>()
+defineProps<AppFormProps>()
 
 const emit = defineEmits<{
     submitValues: [any]
