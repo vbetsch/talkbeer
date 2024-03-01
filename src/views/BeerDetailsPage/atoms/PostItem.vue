@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faStar as faSolidStar } from '@fortawesome/free-solid-svg-icons';
-import { faStar as faRegularStar } from '@fortawesome/free-regular-svg-icons';
+import AppStarGroup from '../../../components/rates/molecules/AppStarGroup.vue';
 
 export interface PostItemProps {
     content: string;
@@ -13,20 +11,7 @@ defineProps<PostItemProps>();
 
 <template>
     <div class="post">
-        <div class="stars">
-            <FontAwesomeIcon
-                v-for="star in starsNumber"
-                :key="star"
-                class="star"
-                :icon="faSolidStar"
-            />
-            <FontAwesomeIcon
-                v-for="star in 5 - starsNumber"
-                :key="star"
-                class="icon"
-                :icon="faRegularStar"
-            />
-        </div>
+        <AppStarGroup :max-value="5" :value="starsNumber" />
         <span>{{ content }}</span>
     </div>
 </template>
@@ -37,16 +22,5 @@ defineProps<PostItemProps>();
     justify-content: start;
     align-items: center;
     gap: 15px;
-}
-
-.stars {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2px;
-}
-
-.star {
-    color: var(--yellow);
 }
 </style>
