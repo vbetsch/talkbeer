@@ -9,7 +9,7 @@ defineProps<InfoListProps>();
 </script>
 
 <template>
-    <Info v-for="(info, key) in list" :key="key" :title="info.title" :value="info.value" />
+    <Info v-for="(info, key) in list" :key="key" :title="info.title" :value="info.value ?? '--'" />
 </template>
 
 <style scoped></style>
