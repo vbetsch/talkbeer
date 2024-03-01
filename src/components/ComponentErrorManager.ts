@@ -1,13 +1,19 @@
-const checkProgressBar = (
+const checkNullValue = (value: number, componentName: string | undefined) => {
+    if (value === 0) {
+        throw new Error(`[ COMPONENT ${componentName ?? 'unknown'} ] A value cannot be null`);
+    }
+};
+
+const checkMaxValue = (
     maxValue: number,
-    progressValue: number,
+    currentValue: number,
     componentName: string | undefined,
 ) => {
-    if (maxValue < progressValue) {
+    if (maxValue < currentValue) {
         throw new Error(
-            `[ COMPONENT ${componentName} ] The maximum value is greater than the progress value`,
+            `[ COMPONENT ${componentName ?? 'unknown'} ] The maximum value ${maxValue} is greater than the setting value ${currentValue}`,
         );
     }
 };
 
-export { checkProgressBar };
+export { checkNullValue, checkMaxValue };

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import AppProgressBar, { AppProgressBarProps } from '../molecules/AppProgressBar.vue';
 import { getCurrentInstance, onMounted, ref } from 'vue';
-import { checkProgressBar } from '../../ComponentErrorManager.ts';
+import { checkMaxValue, checkNullValue } from '../../ComponentErrorManager.ts';
 
 export interface AppProgressBarWithCountersProps extends AppProgressBarProps {}
 
@@ -11,7 +11,9 @@ let errorComponent = ref('');
 
 const checkComponent = () => {
     try {
-        checkProgressBar(props.maxValue, props.progressValue, getCurrentInstance()?.type.__name);
+        const componentName = getCurrentInstance()?.type.__name;
+        checkNullValue(props.maxValue, componentName);
+        checkMaxValue(props.maxValue, props.progressValue, componentName);
     } catch (e: any) {
         errorComponent.value = e.message;
         throw e;
