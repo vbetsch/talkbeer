@@ -2,11 +2,14 @@
 import AppField, { AppFieldProps } from '../molecules/AppField.vue';
 import { reactive } from 'vue';
 import AppStateManagement from '../../states/molecules/AppStateManagement.vue';
+import AppSubLink, { AppSubLinkProps } from '../../links/molecules/AppSubLink.vue';
 
 export interface AppFormProps {
     fields: AppFieldProps[];
     loading: boolean;
     error: string;
+    textButton?: string;
+    sublink?: AppSubLinkProps;
 }
 
 defineProps<AppFormProps>();
@@ -44,7 +47,15 @@ const callbackChangeValue = (keyName: string, value: string) => {
         <div class="app-state-management">
             <AppStateManagement :loading="loading" :error-message="error" />
         </div>
-        <input class="form-button" type="submit" value="Submit" />
+        <div class="footer">
+            <AppSubLink
+                v-if="sublink"
+                :before-text="sublink.beforeText"
+                :after-text="sublink.afterText"
+                :link="sublink.link"
+            />
+            <input class="form-button" type="submit" :value="textButton ?? 'Submit'" />
+        </div>
     </form>
 </template>
 
@@ -80,8 +91,19 @@ const callbackChangeValue = (keyName: string, value: string) => {
     color: var(--white);
 }
 
+.footer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
 .app-state-management {
     width: 250px;
     overflow: hidden;
+}
+
+.sublink {
+    width: 100%;
 }
 </style>

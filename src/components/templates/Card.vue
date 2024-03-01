@@ -17,7 +17,7 @@
 }
 
 .card-content {
-    width: fit-content;
+    width: 23%;
     box-shadow: 0 0 10px 2px #ffcb89;
     border-radius: 15px;
     padding: 25px 10px;

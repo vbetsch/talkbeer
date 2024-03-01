@@ -19,8 +19,9 @@ defineProps<AppSubLinkProps>();
 <style scoped>
 .sublink {
     display: flex;
-    gap: 5px;
     color: var(--grey);
+    gap: 0.4em;
+    font-size: 13px;
 }
 
 .sublink .link {

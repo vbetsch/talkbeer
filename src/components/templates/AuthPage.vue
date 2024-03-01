@@ -5,7 +5,6 @@ import { useAuthStore } from '../../stores/AuthStore.ts';
 import { FieldTypeSupported } from '../../types/FieldTypeSupported.ts';
 import { AuthCredentialsType } from '../../types/Auth.ts';
 import { AppFieldProps } from '../form/molecules/AppField.vue';
-import AppSubLink from '../../components/links/molecules/AppSubLink.vue';
 import { AppSubLinkProps } from '../links/molecules/AppSubLink.vue';
 import Card from './Card.vue';
 
@@ -14,6 +13,7 @@ const store = useAuthStore();
 export interface AuthPageProps {
     title: string;
     sublink: AppSubLinkProps;
+    textFormButton: string;
 }
 
 defineProps<AuthPageProps>();
@@ -51,18 +51,16 @@ const callbackSubmitValues = (mapping: AuthCredentialsType) => {
             :fields="fields"
             :loading="store.isLoading"
             :error="store.errorMessage"
+            :sublink="sublink"
+            :text-button="textFormButton"
             @submit-values="callbackSubmitValues"
-        />
-        <AppSubLink
-            :before-text="sublink.beforeText"
-            :after-text="sublink.afterText"
-            :link="sublink.link"
         />
     </Card>
 </template>
 
 <style scoped>
 .title {
-    padding: 0 7vw 2vh 7vw;
+    padding: 0;
+    justify-content: center;
 }
 </style>
