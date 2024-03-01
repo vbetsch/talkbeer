@@ -1,6 +1,6 @@
-import {initializeApp} from "firebase/app";
-import {getFirestore} from "firebase/firestore";
-import {getAuth} from "firebase/auth";
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_API_KEY,
@@ -17,6 +17,6 @@ export const auth = getAuth(app);
 export const db = getFirestore(app);
 
 export enum DatabaseCollectionEnum {
-    USERS = "users",
-    POSTS = "posts",
+    USERS = 'users',
+    POSTS = 'posts',
 }

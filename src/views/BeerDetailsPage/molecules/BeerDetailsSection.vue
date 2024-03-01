@@ -1,17 +1,16 @@
 <script setup lang="ts">
-import AppSubTitle from "../../../components/titles/AppSubTitle.vue";
+import AppSubTitle from '../../../components/titles/AppSubTitle.vue';
 
 export interface BeerDetailsSectionProps {
-    subtitle: string
+    subtitle: string;
 }
 
-defineProps<BeerDetailsSectionProps>()
-
+defineProps<BeerDetailsSectionProps>();
 </script>
 
 <template>
     <section class="section">
-        <AppSubTitle :text="subtitle"/>
+        <AppSubTitle :text="subtitle" />
         <span class="section-content">
             <slot></slot>
         </span>

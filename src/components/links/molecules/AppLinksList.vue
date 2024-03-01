@@ -1,20 +1,16 @@
 <script setup lang="ts">
-import NavbarLink, {AppLinkProps} from "../atoms/AppLink.vue";
+import NavbarLink, { AppLinkProps } from '../atoms/AppLink.vue';
 
 export interface AppLinksListProps {
-    links: AppLinkProps[]
+    links: AppLinkProps[];
 }
 
-defineProps<AppLinksListProps>()
+defineProps<AppLinksListProps>();
 </script>
 
 <template>
     <div class="links">
-        <NavbarLink
-            v-for="link in links"
-            :page="link.page"
-            :label="link.label"
-        />
+        <NavbarLink v-for="link in links" :page="link.page" :label="link.label" />
     </div>
 </template>
 

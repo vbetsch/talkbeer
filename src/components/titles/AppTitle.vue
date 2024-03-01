@@ -1,9 +1,9 @@
 <script setup lang="ts">
 export interface AppTitleProps {
-    text: string
+    text: string;
 }
 
-defineProps<AppTitleProps>()
+defineProps<AppTitleProps>();
 </script>
 
 <template>

@@ -1,10 +1,9 @@
 <script setup lang="ts">
 export interface AppDefaultTextProps {
-    text?: string
+    text?: string;
 }
 
-defineProps<AppDefaultTextProps>()
-
+defineProps<AppDefaultTextProps>();
 </script>
 
 <template>

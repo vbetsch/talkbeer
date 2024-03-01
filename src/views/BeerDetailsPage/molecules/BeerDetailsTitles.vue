@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import {BeerType} from "../../../types/Beer.ts";
+import { BeerType } from '../../../types/Beer.ts';
 
 export interface BeerDetailsTitlesProps {
-    beer: BeerType
+    beer: BeerType;
 }
 
-defineProps<BeerDetailsTitlesProps>()
+defineProps<BeerDetailsTitlesProps>();
 </script>
 
 <template>

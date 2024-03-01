@@ -1,18 +1,15 @@
 <script setup lang="ts">
-import Info, {InfoProps} from "../atoms/Info.vue";
+import Info, { InfoProps } from '../atoms/Info.vue';
 
 export interface InfoListProps {
-    list: InfoProps[]
+    list: InfoProps[];
 }
 
-defineProps<InfoListProps>()
-
+defineProps<InfoListProps>();
 </script>
 
 <template>
-    <Info v-for="info in list" :title="info.title" :value="info.value"/>
+    <Info v-for="info in list" :title="info.title" :value="info.value" />
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

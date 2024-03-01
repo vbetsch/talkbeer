@@ -1,27 +1,26 @@
 <script setup lang="ts">
-
-import {router} from "../../../Router.ts";
-import {BeerType} from "../../../types/Beer.ts";
+import { router } from '../../../Router.ts';
+import { BeerType } from '../../../types/Beer.ts';
 
 export interface BeerItemProps {
-    beer?: BeerType
+    beer?: BeerType;
 }
 
-defineProps<BeerItemProps>()
+defineProps<BeerItemProps>();
 
 const clickOnBeer = (id: number) => {
     router.push({
-        name: "Beer",
+        name: 'Beer',
         params: {
-            beerId: id
-        }
-    })
-}
+            beerId: id,
+        },
+    });
+};
 </script>
 
 <template>
     <div v-if="beer" class="beer" @click="clickOnBeer(beer?.id)">
-        <img class="image" :src="beer?.image_url" :alt="beer?.name + ' image'">
+        <img class="image" :src="beer?.image_url" :alt="beer?.name + ' image'" />
         <span class="text">{{ beer?.name }}</span>
     </div>
 </template>

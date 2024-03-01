@@ -1,10 +1,10 @@
 <script setup lang="ts">
 export interface AppLinkProps {
-    page: string
-    label?: string
+    page: string;
+    label?: string;
 }
 
-const props = defineProps<AppLinkProps>()
+const props = defineProps<AppLinkProps>();
 </script>
 
 <template>

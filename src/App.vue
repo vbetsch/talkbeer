@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import TheNavbar from "./components/links/organisms/TheNavbar.vue";
+import TheNavbar from './components/links/organisms/TheNavbar.vue';
 </script>
 
 <template>
-    <TheNavbar/>
+    <TheNavbar />
     <div class="container">
-        <router-view/>
+        <router-view />
     </div>
 </template>
 

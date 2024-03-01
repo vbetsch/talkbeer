@@ -1,75 +1,76 @@
 <script setup lang="ts">
-import BeerDetailsInfos from "../molecules/BeerDetailsInfos.vue";
-import {BeerType} from "../../../types/Beer.ts";
-import BeerDetailsTitles from "../molecules/BeerDetailsTitles.vue";
-import AppButton from "../../../components/buttons/AppButton.vue";
-import {faHeart as faRegularHeart} from "@fortawesome/free-regular-svg-icons";
-import {faHeart as faSolidHeart} from "@fortawesome/free-solid-svg-icons";
-import {computed, ref} from "vue";
-import {useBeerStore} from "../../../stores/BeerStore.ts";
-import {storeToRefs} from "pinia";
-import InfoList from "../../../components/text/molecules/InfoList.vue";
-import BeerDetailsSection from "../molecules/BeerDetailsSection.vue";
-import PostsList from "../molecules/PostsList.vue";
-import {usePostStore} from "../../../stores/PostStore.ts";
-
+import BeerDetailsInfos from '../molecules/BeerDetailsInfos.vue';
+import { BeerType } from '../../../types/Beer.ts';
+import BeerDetailsTitles from '../molecules/BeerDetailsTitles.vue';
+import AppButton from '../../../components/buttons/AppButton.vue';
+import { faHeart as faRegularHeart } from '@fortawesome/free-regular-svg-icons';
+import { faHeart as faSolidHeart } from '@fortawesome/free-solid-svg-icons';
+import { computed, ref } from 'vue';
+import { useBeerStore } from '../../../stores/BeerStore.ts';
+import { storeToRefs } from 'pinia';
+import InfoList from '../../../components/text/molecules/InfoList.vue';
+import BeerDetailsSection from '../molecules/BeerDetailsSection.vue';
+import PostsList from '../molecules/PostsList.vue';
+import { usePostStore } from '../../../stores/PostStore.ts';
 
 export interface BeerDetailsProps {
-    beer: BeerType
-    loading: boolean
-    error: string
+    beer: BeerType;
+    loading: boolean;
+    error: string;
 }
 
-const props = defineProps<BeerDetailsProps>()
+const props = defineProps<BeerDetailsProps>();
 
 const emit = defineEmits<{
-    addBeerToFavorites: []
-    removeBeerToFavorites: []
-}>()
+    addBeerToFavorites: [];
+    removeBeerToFavorites: [];
+}>();
 
-const beerStore = useBeerStore()
-const {favoriteIdBeers} = storeToRefs(beerStore)
+const beerStore = useBeerStore();
+const { favoriteIdBeers } = storeToRefs(beerStore);
 
-const postStore = usePostStore()
-const {currentPosts} = storeToRefs(postStore)
+const postStore = usePostStore();
+const { currentPosts } = storeToRefs(postStore);
 
-let isFavorited = ref<boolean>(favoriteIdBeers.value.includes(props.beer.id))
-let isHover = ref<boolean>(false)
+let isFavorited = ref<boolean>(favoriteIdBeers.value.includes(props.beer.id));
+let isHover = ref<boolean>(false);
 
-const WHITE: string = "var(--white)"
-const PINK: string = "#ff00e3"
+const WHITE: string = 'var(--white)';
+const PINK: string = '#ff00e3';
 
 const computeButtonStyle = computed(() =>
-    isHover.value ?
-        `color: ${isFavorited.value ? WHITE : PINK};` :
-        `color: ${isFavorited.value ? PINK : WHITE};`
-)
+    isHover.value
+        ? `color: ${isFavorited.value ? WHITE : PINK};`
+        : `color: ${isFavorited.value ? PINK : WHITE};`,
+);
 
 const callbackDoAction = () => {
     if (isFavorited.value) {
-        isFavorited.value = false
-        emit('removeBeerToFavorites')
+        isFavorited.value = false;
+        emit('removeBeerToFavorites');
     } else {
-        isFavorited.value = true
-        emit('addBeerToFavorites')
+        isFavorited.value = true;
+        emit('addBeerToFavorites');
     }
-}
+};
 </script>
 
 <template>
     <div v-if="!loading && !error" class="infos">
-        <BeerDetailsTitles :beer="beer"/>
+        <BeerDetailsTitles :beer="beer" />
         <div class="more">
-            <InfoList :list="[
-                {
-                    title: 'Contributed by',
-                    value: beer.contributed_by
-                },
-                {
-                    title: 'First Brewed',
-                    value: beer.first_brewed
-                },
-            ]"/>
+            <InfoList
+                :list="[
+                    {
+                        title: 'Contributed by',
+                        value: beer.contributed_by,
+                    },
+                    {
+                        title: 'First Brewed',
+                        value: beer.first_brewed,
+                    },
+                ]"
+            />
             <AppButton
                 class="button"
                 :icon="isFavorited ? faSolidHeart : faRegularHeart"
@@ -83,9 +84,9 @@ const callbackDoAction = () => {
             {{ beer.description }}
         </BeerDetailsSection>
         <BeerDetailsSection subtitle="Details">
-            <BeerDetailsInfos :loading="loading" :error="error" :beer="beer"/>
+            <BeerDetailsInfos :loading="loading" :error="error" :beer="beer" />
         </BeerDetailsSection>
-        <PostsList :list="currentPosts"/>
+        <PostsList :list="currentPosts" />
     </div>
 </template>
 

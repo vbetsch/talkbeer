@@ -1,47 +1,51 @@
 <script setup lang="ts">
-import {auth} from "../../data/firebase.ts";
-import AppTitle from "../../components/titles/AppTitle.vue";
-import AppButton from "../../components/buttons/AppButton.vue";
-import {useAuthStore} from "../../stores/AuthStore.ts";
-import {router} from "../../Router.ts";
-import AppLink from "../../components/links/atoms/AppLink.vue";
-import InfoList from "../../components/text/molecules/InfoList.vue";
+import { auth } from '../../data/firebase.ts';
+import AppTitle from '../../components/titles/AppTitle.vue';
+import AppButton from '../../components/buttons/AppButton.vue';
+import { useAuthStore } from '../../stores/AuthStore.ts';
+import { router } from '../../Router.ts';
+import AppLink from '../../components/links/atoms/AppLink.vue';
+import InfoList from '../../components/text/molecules/InfoList.vue';
 
 const store = useAuthStore();
 const callbackDoAction = async () => {
-    store.logOutUser()
+    store
+        .logOutUser()
         .then(() => {
-            router.push("login").catch((e) => console.error(e))
-        }).catch((e) => {
-        console.error(e)
-    })
-}
+            router.push('login').catch((e) => console.error(e));
+        })
+        .catch((e) => {
+            console.error(e);
+        });
+};
 </script>
 
 <template>
-    <AppTitle text="Profile"/>
+    <AppTitle text="Profile" />
     <div v-if="auth.currentUser" class="profile-container">
         <div class="infos">
-            <InfoList :list="[
-                {
-                    title: 'Email :',
-                    value: auth.currentUser.email
-                },
-                {
-                    title: 'Creation time :',
-                    value: auth.currentUser.metadata.creationTime
-                },
-                {
-                    title: 'Last sign in time :',
-                    value: auth.currentUser.metadata.lastSignInTime
-                },
-            ]"/>
+            <InfoList
+                :list="[
+                    {
+                        title: 'Email :',
+                        value: auth.currentUser.email,
+                    },
+                    {
+                        title: 'Creation time :',
+                        value: auth.currentUser.metadata.creationTime,
+                    },
+                    {
+                        title: 'Last sign in time :',
+                        value: auth.currentUser.metadata.lastSignInTime,
+                    },
+                ]"
+            />
         </div>
-        <AppButton label="Log out" @doAction="callbackDoAction"/>
+        <AppButton label="Log out" @doAction="callbackDoAction" />
     </div>
     <div v-else class="profile-container">
         <span class="error">You are not logged in. To log in please follow this link:</span>
-        <AppLink page="Login"/>
+        <AppLink page="Login" />
     </div>
 </template>
 

@@ -1,36 +1,33 @@
 <script setup lang="ts">
-import {ref, watch} from "vue";
-import {FieldTypeSupported} from "../../../types/FieldTypeSupported.ts";
+import { ref, watch } from 'vue';
+import { FieldTypeSupported } from '../../../types/FieldTypeSupported.ts';
 
 export interface AppFieldProps {
-    keyName: string
-    type: FieldTypeSupported
-    label: string
-    placeholder: string
-    required?: boolean
+    keyName: string;
+    type: FieldTypeSupported;
+    label: string;
+    placeholder: string;
+    required?: boolean;
 }
 
-const props = defineProps<AppFieldProps>()
+const props = defineProps<AppFieldProps>();
 
 const emit = defineEmits<{
-    changeValue: [keyName:string, value: string]
-}>()
+    changeValue: [keyName: string, value: string];
+}>();
 
-let value = ref<string>()
+let value = ref<string>();
 
 watch(value, (newValue, oldValue) => {
     if (newValue && newValue !== oldValue) {
-        emit('changeValue', props.keyName, newValue)
+        emit('changeValue', props.keyName, newValue);
     }
-})
+});
 </script>
 
 <template>
     <div class="form-field">
-        <label
-            class="form-label"
-            :for="keyName"
-        >
+        <label class="form-label" :for="keyName">
             {{ label }}<span v-if="required" class="required">*</span>
         </label>
         <input
@@ -41,7 +38,7 @@ watch(value, (newValue, oldValue) => {
             v-model="value"
             :placeholder="placeholder"
             :required="required"
-        >
+        />
     </div>
 </template>
 

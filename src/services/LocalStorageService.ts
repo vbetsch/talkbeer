@@ -1,16 +1,12 @@
 enum LocalStorageKeys {
-    FAVORITES = "favorites"
+    FAVORITES = 'favorites',
 }
 
 const getLocalStorageValue = (key: LocalStorageKeys, defaultValue: string) => {
-    return JSON.parse(localStorage.getItem(key) || defaultValue)
-}
+    return JSON.parse(localStorage.getItem(key) || defaultValue);
+};
 const setLocalStorageValue = (key: LocalStorageKeys, value: any) => {
-    return localStorage.setItem(key, JSON.stringify(value))
-}
+    return localStorage.setItem(key, JSON.stringify(value));
+};
 
-export {
-    LocalStorageKeys,
-    getLocalStorageValue,
-    setLocalStorageValue
-}
+export { LocalStorageKeys, getLocalStorageValue, setLocalStorageValue };

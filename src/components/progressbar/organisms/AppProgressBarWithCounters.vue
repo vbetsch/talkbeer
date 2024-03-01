@@ -1,25 +1,24 @@
 <script setup lang="ts">
-import AppProgressBar, {AppProgressBarProps} from "../molecules/AppProgressBar.vue";
-import {getCurrentInstance, onMounted, ref} from "vue";
-import {checkProgressBar} from "../../ComponentErrorManager.ts";
+import AppProgressBar, { AppProgressBarProps } from '../molecules/AppProgressBar.vue';
+import { getCurrentInstance, onMounted, ref } from 'vue';
+import { checkProgressBar } from '../../ComponentErrorManager.ts';
 
-export interface AppProgressBarWithCountersProps extends AppProgressBarProps {
-}
+export interface AppProgressBarWithCountersProps extends AppProgressBarProps {}
 
-const props = defineProps<AppProgressBarWithCountersProps>()
+const props = defineProps<AppProgressBarWithCountersProps>();
 
-let errorComponent = ref("")
+let errorComponent = ref('');
 
 const checkComponent = () => {
     try {
-        checkProgressBar(props.maxValue, props.progressValue, getCurrentInstance()?.type.__name)
+        checkProgressBar(props.maxValue, props.progressValue, getCurrentInstance()?.type.__name);
     } catch (e: any) {
-        errorComponent.value = e.message
-        throw e
+        errorComponent.value = e.message;
+        throw e;
     }
-}
+};
 
-onMounted(checkComponent)
+onMounted(checkComponent);
 </script>
 
 <template>
@@ -32,8 +31,8 @@ onMounted(checkComponent)
         />
         <span class="counters">
             <span class="counter">
-                {{ progressValue }}
-            </span>/{{ maxValue }}
+                {{ progressValue }} </span
+            >/{{ maxValue }}
         </span>
     </div>
 </template>

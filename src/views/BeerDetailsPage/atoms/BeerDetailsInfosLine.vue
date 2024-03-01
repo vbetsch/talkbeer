@@ -1,24 +1,24 @@
 <script setup lang="ts">
-import {computed} from "vue";
-import AppProgressBarWithCounters from "../../../components/progressbar/organisms/AppProgressBarWithCounters.vue";
+import { computed } from 'vue';
+import AppProgressBarWithCounters from '../../../components/progressbar/organisms/AppProgressBarWithCounters.vue';
 
 export interface BeerDetailsInfosLineProgressBar {
-    width?: number,
-    color?: string,
-    maxValue: number
+    width?: number;
+    color?: string;
+    maxValue: number;
 }
 
 export interface BeerDetailsInfosLineProps {
-    label: string
-    alias?: string
-    value?: string | number
-    measurement?: string
-    progressBar?: BeerDetailsInfosLineProgressBar
+    label: string;
+    alias?: string;
+    value?: string | number;
+    measurement?: string;
+    progressBar?: BeerDetailsInfosLineProgressBar;
 }
 
-const props = defineProps<BeerDetailsInfosLineProps>()
+const props = defineProps<BeerDetailsInfosLineProps>();
 
-const aliasBetweenParenthesis = computed(() => props.alias && `(${props.alias})`)
+const aliasBetweenParenthesis = computed(() => props.alias && `(${props.alias})`);
 </script>
 
 <template>
@@ -32,7 +32,7 @@ const aliasBetweenParenthesis = computed(() => props.alias && `(${props.alias})`
             :maxValue="progressBar.maxValue"
         />
         <div v-else>
-            <span class="value">{{ value ?? "--" }}{{ measurement }}</span>
+            <span class="value">{{ value ?? '--' }}{{ measurement }}</span>
         </div>
     </div>
 </template>

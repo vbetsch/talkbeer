@@ -1,9 +1,9 @@
 <script setup lang="ts">
 export interface AppLoadingProps {
-    loading: boolean
+    loading: boolean;
 }
 
-defineProps<AppLoadingProps>()
+defineProps<AppLoadingProps>();
 </script>
 
 <template>

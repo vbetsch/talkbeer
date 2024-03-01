@@ -1,25 +1,28 @@
 <script setup lang="ts">
-import BeerItem from "../molecules/BeerItem.vue";
-import AppStateManagement from "../../../components/states/molecules/AppStateManagement.vue";
-import {BeerType} from "../../../types/Beer.ts";
-import AppDefaultText from "../../states/atoms/AppDefaultText.vue";
+import BeerItem from '../molecules/BeerItem.vue';
+import AppStateManagement from '../../../components/states/molecules/AppStateManagement.vue';
+import { BeerType } from '../../../types/Beer.ts';
+import AppDefaultText from '../../states/atoms/AppDefaultText.vue';
 
 export interface BeerListProps {
-    list: BeerType[]
-    loading: boolean
-    error: string
+    list: BeerType[];
+    loading: boolean;
+    error: string;
 }
 
-defineProps<BeerListProps>()
+defineProps<BeerListProps>();
 </script>
 
 <template>
-    <AppStateManagement :loading="loading" :errorMessage="error"/>
+    <AppStateManagement :loading="loading" :errorMessage="error" />
     <div v-if="!loading && !error && list.length" class="beers">
-        <BeerItem :beer="beer" v-for="beer in list.sort((beerA, beerB) => beerA.name.localeCompare(beerB.name))"/>
+        <BeerItem
+            :beer="beer"
+            v-for="beer in list.sort((beerA, beerB) => beerA.name.localeCompare(beerB.name))"
+        />
     </div>
     <div v-if="!loading && !error && !list.length">
-        <AppDefaultText text="No beer found"/>
+        <AppDefaultText text="No beer found" />
     </div>
 </template>
 

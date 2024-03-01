@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import AppLink, {AppLinkProps} from "../atoms/AppLink.vue";
+import AppLink, { AppLinkProps } from '../atoms/AppLink.vue';
 
 export interface AppSubLinkProps {
-    beforeText: string
-    afterText: string
-    link: AppLinkProps
+    beforeText: string;
+    afterText: string;
+    link: AppLinkProps;
 }
 
-defineProps<AppSubLinkProps>()
+defineProps<AppSubLinkProps>();
 </script>
 
 <template>
     <span class="sublink">
-        {{ beforeText }} <AppLink :page="link.page" :label="link.label"/> {{ afterText }}
+        {{ beforeText }} <AppLink :page="link.page" :label="link.label" /> {{ afterText }}
     </span>
 </template>
 

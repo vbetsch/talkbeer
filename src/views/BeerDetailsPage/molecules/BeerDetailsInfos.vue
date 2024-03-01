@@ -1,45 +1,44 @@
 <script setup lang="ts">
-import BeerDetailsInfosLine, {BeerDetailsInfosLineProps} from "../atoms/BeerDetailsInfosLine.vue";
-import {useBeerStore} from "../../../stores/BeerStore.ts";
-import {storeToRefs} from "pinia";
-import {router} from "../../../Router.ts";
-import {onMounted} from "vue";
+import BeerDetailsInfosLine, { BeerDetailsInfosLineProps } from '../atoms/BeerDetailsInfosLine.vue';
+import { useBeerStore } from '../../../stores/BeerStore.ts';
+import { storeToRefs } from 'pinia';
+import { router } from '../../../Router.ts';
+import { onMounted } from 'vue';
 
-const store = useBeerStore()
-const {currentBeer} = storeToRefs(store)
+const store = useBeerStore();
+const { currentBeer } = storeToRefs(store);
 
-const beerId = router?.currentRoute?.value?.params?.beerId as string
+const beerId = router?.currentRoute?.value?.params?.beerId as string;
 
-onMounted(() => store.setCurrentBeerFromData(beerId))
+onMounted(() => store.setCurrentBeerFromData(beerId));
 
 const infos: BeerDetailsInfosLineProps[] = [
     {
-        label: "Alcoolémie",
-        alias: "ABV",
+        label: 'Alcoolémie',
+        alias: 'ABV',
         value: currentBeer.value.abv,
-        measurement: "%"
+        measurement: '%',
     },
     {
-        label: "Acidité",
-        alias: "PH",
-        value: currentBeer.value.ph
+        label: 'Acidité',
+        alias: 'PH',
+        value: currentBeer.value.ph,
     },
     {
-        label: "Indice de couleur",
-        alias: "EBC",
+        label: 'Indice de couleur',
+        alias: 'EBC',
         value: currentBeer.value.ebc,
     },
     {
         label: "Indice d'amertume",
-        alias: "IBU",
+        alias: 'IBU',
         value: currentBeer.value.ibu,
         progressBar: {
             width: 150,
             maxValue: 150,
-        }
+        },
     },
-]
-
+];
 </script>
 
 <template>

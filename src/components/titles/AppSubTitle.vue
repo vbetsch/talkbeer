@@ -3,8 +3,7 @@ export interface AppSubTitleProps {
     text: string;
 }
 
-defineProps<AppSubTitleProps>()
-
+defineProps<AppSubTitleProps>();
 </script>
 
 <template>

@@ -1,35 +1,40 @@
 <script setup lang="ts">
-import {computed, getCurrentInstance, onMounted, ref} from "vue";
-import {checkProgressBar} from "../../ComponentErrorManager.ts";
+import { computed, getCurrentInstance, onMounted, ref } from 'vue';
+import { checkProgressBar } from '../../ComponentErrorManager.ts';
 
 export interface AppProgressBarProps {
-    width?: number,
-    color?: string,
-    progressValue: number,
-    maxValue: number
+    width?: number;
+    color?: string;
+    progressValue: number;
+    maxValue: number;
 }
 
 const props = withDefaults(defineProps<AppProgressBarProps>(), {
-    width: 150
-})
+    width: 150,
+});
 
-let errorComponent = ref("")
+let errorComponent = ref('');
 
 const checkComponent = () => {
     try {
-        checkProgressBar(props.maxValue, props.progressValue, getCurrentInstance()?.type.__name)
+        checkProgressBar(props.maxValue, props.progressValue, getCurrentInstance()?.type.__name);
     } catch (e: any) {
-        errorComponent.value = e.message
-        throw e
+        errorComponent.value = e.message;
+        throw e;
     }
-}
+};
 
-const getWidth = (progressValue: number, maxValue: number) => 100 * progressValue / maxValue
-const computedContainerStyle = computed(() => `width: ${props.width}px;`)
-const computedContentFixColorStyle = computed(() => `background-color: ${props.color}; width: ${getWidth(props.progressValue, props.maxValue)}%;`)
-const computedContentGradientStyle = computed(() => `width: ${100 - getWidth(props.progressValue, props.maxValue)}%;`)
+const getWidth = (progressValue: number, maxValue: number) => (100 * progressValue) / maxValue;
+const computedContainerStyle = computed(() => `width: ${props.width}px;`);
+const computedContentFixColorStyle = computed(
+    () =>
+        `background-color: ${props.color}; width: ${getWidth(props.progressValue, props.maxValue)}%;`,
+);
+const computedContentGradientStyle = computed(
+    () => `width: ${100 - getWidth(props.progressValue, props.maxValue)}%;`,
+);
 
-onMounted(checkComponent)
+onMounted(checkComponent);
 </script>
 
 <template>

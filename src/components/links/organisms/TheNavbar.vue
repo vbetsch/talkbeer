@@ -1,23 +1,25 @@
 <script setup lang="ts">
-import TheNavbarLinksList from "../molecules/AppLinksList.vue";
+import TheNavbarLinksList from '../molecules/AppLinksList.vue';
 </script>
 
 <template>
     <div class="navbar">
         <router-link class="link" :to="{ name: 'Home' }">
-            <img class="logo" src="/img/talkbeer.png" alt="logo">
+            <img class="logo" src="/img/talkbeer.png" alt="logo" />
         </router-link>
-        <TheNavbarLinksList :links="[
-            {
-                page: 'Home'
-            },
-            {
-                page: 'Favorites'
-            },
-            {
-                page: 'Profile'
-            },
-        ]"/>
+        <TheNavbarLinksList
+            :links="[
+                {
+                    page: 'Home',
+                },
+                {
+                    page: 'Favorites',
+                },
+                {
+                    page: 'Profile',
+                },
+            ]"
+        />
     </div>
 </template>
 

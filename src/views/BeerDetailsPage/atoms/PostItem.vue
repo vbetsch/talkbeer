@@ -1,23 +1,23 @@
 <script setup lang="ts">
-import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
-import {faStar as faSolidStar} from "@fortawesome/free-solid-svg-icons";
-import {faStar as faRegularStar} from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { faStar as faSolidStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar as faRegularStar } from '@fortawesome/free-regular-svg-icons';
 
 export interface PostItemProps {
     content: string;
-    starsNumber: number
+    starsNumber: number;
 }
 
-const props = defineProps<PostItemProps>()
+const props = defineProps<PostItemProps>();
 </script>
 
 <template>
     <div class="post">
         <div class="stars">
-            <FontAwesomeIcon v-for="star in starsNumber" class="star" :icon="faSolidStar"/>
-            <FontAwesomeIcon v-for="star in (5 - starsNumber)" class="icon" :icon="faRegularStar"/>
+            <FontAwesomeIcon v-for="star in starsNumber" class="star" :icon="faSolidStar" />
+            <FontAwesomeIcon v-for="star in 5 - starsNumber" class="icon" :icon="faRegularStar" />
         </div>
-        <span>{{ content}}</span>
+        <span>{{ content }}</span>
     </div>
 </template>
 

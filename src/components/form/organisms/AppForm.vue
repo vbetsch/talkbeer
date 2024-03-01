@@ -1,30 +1,30 @@
 <script setup lang="ts">
-import AppField, {AppFieldProps} from "../molecules/AppField.vue";
-import {reactive} from "vue";
-import AppStateManagement from "../../states/molecules/AppStateManagement.vue";
+import AppField, { AppFieldProps } from '../molecules/AppField.vue';
+import { reactive } from 'vue';
+import AppStateManagement from '../../states/molecules/AppStateManagement.vue';
 
 export interface AppFormProps {
-    fields: AppFieldProps[]
-    loading: boolean
-    error: string
+    fields: AppFieldProps[];
+    loading: boolean;
+    error: string;
 }
 
-defineProps<AppFormProps>()
+defineProps<AppFormProps>();
 
 const emit = defineEmits<{
-    submitValues: [any]
-}>()
+    submitValues: [any];
+}>();
 
-let mapping = reactive({} as any)
+let mapping = reactive({} as any);
 
 const onSubmit = (e: Event) => {
     e.preventDefault();
-    emit('submitValues', mapping)
-}
+    emit('submitValues', mapping);
+};
 
 const callbackChangeValue = (keyName: string, value: string) => {
-    mapping[keyName] = value
-}
+    mapping[keyName] = value;
+};
 </script>
 
 <template>
@@ -41,13 +41,9 @@ const callbackChangeValue = (keyName: string, value: string) => {
             />
         </div>
         <div class="app-state-management">
-            <AppStateManagement :loading="loading" :error-message="error"/>
+            <AppStateManagement :loading="loading" :error-message="error" />
         </div>
-        <input
-            class="form-button"
-            type="submit"
-            value="Submit"
-        >
+        <input class="form-button" type="submit" value="Submit" />
     </form>
 </template>
 
