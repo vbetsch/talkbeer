@@ -25,7 +25,7 @@ const callbackRemoveBeerToFavorites = () => beerStore.removeBeerToFavorites(curr
 </script>
 
 <template>
-    <AppStateManagement :loading="beerStore.isLoading" :errorMessage="beerStore.errorMessage" />
+    <AppStateManagement :loading="beerStore.isLoading" :error-message="beerStore.errorMessage" />
     <div v-if="!beerStore.isLoading && !beerStore.errorMessage" class="content">
         <img class="image" :src="currentBeer.image_url" :alt="currentBeer.name" />
         <BeerDetails
@@ -33,8 +33,8 @@ const callbackRemoveBeerToFavorites = () => beerStore.removeBeerToFavorites(curr
             :beer="currentBeer"
             :error="beerStore.errorMessage"
             :loading="beerStore.isLoading"
-            @addBeerToFavorites="callbackAddBeerToFavorites"
-            @removeBeerToFavorites="callbackRemoveBeerToFavorites"
+            @add-beer-to-favorites="callbackAddBeerToFavorites"
+            @remove-beer-to-favorites="callbackRemoveBeerToFavorites"
         />
     </div>
 </template>

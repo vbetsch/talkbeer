@@ -28,8 +28,8 @@ const aliasBetweenParenthesis = computed(() => props.alias && `(${props.alias})`
             v-if="progressBar && value && typeof value === 'number'"
             :width="progressBar.width"
             :color="progressBar.color"
-            :progressValue="value"
-            :maxValue="progressBar.maxValue"
+            :progress-value="value"
+            :max-value="progressBar.maxValue"
         />
         <div v-else>
             <span class="value">{{ value ?? '--' }}{{ measurement }}</span>

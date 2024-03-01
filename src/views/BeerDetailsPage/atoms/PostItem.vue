@@ -8,14 +8,24 @@ export interface PostItemProps {
     starsNumber: number;
 }
 
-const props = defineProps<PostItemProps>();
+defineProps<PostItemProps>();
 </script>
 
 <template>
     <div class="post">
         <div class="stars">
-            <FontAwesomeIcon v-for="star in starsNumber" class="star" :icon="faSolidStar" />
-            <FontAwesomeIcon v-for="star in 5 - starsNumber" class="icon" :icon="faRegularStar" />
+            <FontAwesomeIcon
+                v-for="star in starsNumber"
+                :key="star"
+                class="star"
+                :icon="faSolidStar"
+            />
+            <FontAwesomeIcon
+                v-for="star in 5 - starsNumber"
+                :key="star"
+                class="icon"
+                :icon="faRegularStar"
+            />
         </div>
         <span>{{ content }}</span>
     </div>

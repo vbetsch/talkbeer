@@ -77,7 +77,7 @@ const callbackDoAction = () => {
                 :style="computeButtonStyle"
                 @mouseenter="isHover = true"
                 @mouseleave="isHover = false"
-                @doAction="callbackDoAction"
+                @do-action="callbackDoAction"
             />
         </div>
         <BeerDetailsSection subtitle="Description">

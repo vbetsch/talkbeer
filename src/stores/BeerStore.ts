@@ -27,7 +27,10 @@ export const useBeerStore = defineStore('beers', () => {
         isLoading.value = true;
         try {
             const response: AxiosResponse<BeerType[], any> = await getAllBeers();
-            allBeers = replaceObjectTo(allBeers, response.data);
+            allBeers = replaceObjectTo(
+                allBeers,
+                response.data.sort((beerA, beerB) => beerA.name.localeCompare(beerB.name)),
+            );
             errorMessage.value = '';
         } catch (e: any) {
             errorMessage.value = 'Error fetching data: ' + e.message;

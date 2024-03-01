@@ -8,9 +8,9 @@ defineProps<InfoProps>();
 </script>
 
 <template>
-    <span class="info"
-        >{{ title }} <span class="value">{{ value }}</span></span
-    >
+    <span class="info">
+        {{ title }} <span class="value">{{ value }}</span>
+    </span>
 </template>
 
 <style scoped>

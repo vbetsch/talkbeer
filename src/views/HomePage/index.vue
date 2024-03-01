@@ -31,10 +31,10 @@ const callbackDisplayOriginalList = (state: boolean) => {
     <div class="subnavbar">
         <AppSearchBar
             placeholder="Rechercher une bière..."
-            totalWidth="300px"
+            total-width="300px"
             :list="allBeers"
-            @displayOriginalList="callbackDisplayOriginalList"
-            @applyFilter="callbackApplyFilter"
+            @display-original-list="callbackDisplayOriginalList"
+            @apply-filter="callbackApplyFilter"
         />
         <!-- TODO: Move to navbar -->
     </div>

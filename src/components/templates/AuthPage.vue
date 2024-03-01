@@ -4,7 +4,7 @@ import AppTitle from '../../components/titles/AppTitle.vue';
 import { useAuthStore } from '../../stores/AuthStore.ts';
 import { FieldTypeSupported } from '../../types/FieldTypeSupported.ts';
 import { AuthCredentialsType } from '../../types/Auth.ts';
-import { AppFieldProps } from '../../components/form/molecules/AppField.vue';
+import { AppFieldProps } from '../form/molecules/AppField.vue';
 import AppSubLink from '../../components/links/molecules/AppSubLink.vue';
 import { AppSubLinkProps } from '../links/molecules/AppSubLink.vue';
 import Card from './Card.vue';
@@ -51,7 +51,7 @@ const callbackSubmitValues = (mapping: AuthCredentialsType) => {
             :fields="fields"
             :loading="store.isLoading"
             :error="store.errorMessage"
-            @submitValues="callbackSubmitValues"
+            @submit-values="callbackSubmitValues"
         />
         <AppSubLink
             :before-text="sublink.beforeText"

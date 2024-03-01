@@ -31,13 +31,14 @@ const callbackChangeValue = (keyName: string, value: string) => {
     <form class="form" @submit="onSubmit">
         <div class="form-fields">
             <AppField
-                v-for="field in fields"
+                v-for="(field, key) in fields"
+                :key="key"
                 :type="field.type"
-                :keyName="field.keyName"
+                :key-name="field.keyName"
                 :label="field.label"
                 :placeholder="field.placeholder"
                 :required="field.required"
-                @changeValue="callbackChangeValue"
+                @change-value="callbackChangeValue"
             />
         </div>
         <div class="app-state-management">

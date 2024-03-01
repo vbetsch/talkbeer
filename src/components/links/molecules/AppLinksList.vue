@@ -10,7 +10,7 @@ defineProps<AppLinksListProps>();
 
 <template>
     <div class="links">
-        <NavbarLink v-for="link in links" :page="link.page" :label="link.label" />
+        <NavbarLink v-for="(link, key) in links" :key="key" :page="link.page" :label="link.label" />
     </div>
 </template>
 

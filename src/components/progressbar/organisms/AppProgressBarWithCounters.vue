@@ -27,12 +27,10 @@ onMounted(checkComponent);
             :color="color"
             :max-value="maxValue"
             :width="width"
-            :progressValue="progressValue"
+            :progress-value="progressValue"
         />
         <span class="counters">
-            <span class="counter">
-                {{ progressValue }} </span
-            >/{{ maxValue }}
+            <span class="counter"> {{ progressValue }} </span>/{{ maxValue }}
         </span>
     </div>
 </template>

@@ -31,11 +31,11 @@ watch(value, (newValue, oldValue) => {
             {{ label }}<span v-if="required" class="required">*</span>
         </label>
         <input
-            class="form-input"
             :id="keyName"
+            v-model="value"
+            class="form-input"
             :name="keyName"
             :type="type"
-            v-model="value"
             :placeholder="placeholder"
             :required="required"
         />

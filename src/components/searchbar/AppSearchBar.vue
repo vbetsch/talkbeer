@@ -53,9 +53,9 @@ watch(searchMode, (newValue, oldValue) => {
 <template>
     <div class="searchbar" :style="computeTotalWidth">
         <input
+            v-model="inputValue"
             class="search-input"
             type="text"
-            v-model="inputValue"
             :style="computeInputSize"
             :placeholder="placeholder"
             @focusout="searchMode = false"

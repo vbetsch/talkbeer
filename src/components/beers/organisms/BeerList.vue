@@ -14,12 +14,9 @@ defineProps<BeerListProps>();
 </script>
 
 <template>
-    <AppStateManagement :loading="loading" :errorMessage="error" />
+    <AppStateManagement :loading="loading" :error-message="error" />
     <div v-if="!loading && !error && list.length" class="beers">
-        <BeerItem
-            :beer="beer"
-            v-for="beer in list.sort((beerA, beerB) => beerA.name.localeCompare(beerB.name))"
-        />
+        <BeerItem v-for="beer in list" :key="beer.id" :beer="beer" />
     </div>
     <div v-if="!loading && !error && !list.length">
         <AppDefaultText text="No beer found" />

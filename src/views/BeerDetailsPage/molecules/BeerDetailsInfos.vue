@@ -43,7 +43,7 @@ const infos: BeerDetailsInfosLineProps[] = [
 
 <template>
     <div v-if="!store.isLoading && !store.errorMessage" class="details">
-        <div class="detail" v-for="info in infos">
+        <div v-for="(info, key) in infos" :key="key" class="detail">
             <BeerDetailsInfosLine
                 v-if="info.value"
                 :label="info.label"

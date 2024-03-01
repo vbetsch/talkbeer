@@ -17,7 +17,6 @@ const callbackSubmitValues = async (mapping: AuthCredentialsType) => {
 <template>
     <AuthPage
         title="Register"
-        @submitForm="callbackSubmitValues"
         :sublink="{
             beforeText: 'Already have an account? Go to the',
             afterText: 'page',
@@ -26,6 +25,7 @@ const callbackSubmitValues = async (mapping: AuthCredentialsType) => {
                 label: 'login',
             },
         }"
+        @submit-form="callbackSubmitValues"
     />
 </template>
 

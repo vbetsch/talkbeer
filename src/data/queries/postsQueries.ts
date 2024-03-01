@@ -11,7 +11,7 @@ export const getPosts = async () => {
     try {
         const querySnapshot = await getDocs(collection(db, DatabaseCollectionEnum.POSTS));
         const posts: PostDocument[] = [];
-        querySnapshot.forEach((doc) => {
+        querySnapshot.forEach(doc => {
             posts.push({ id: doc.id, ...doc.data() } as PostDocument);
         });
         return posts;
@@ -26,7 +26,7 @@ export const getPostsByBeer = async (beerId: number) => {
             query(collection(db, DatabaseCollectionEnum.POSTS), where('beerId', '==', beerId)),
         );
         const posts: PostDocument[] = [];
-        querySnapshot.forEach((doc) => {
+        querySnapshot.forEach(doc => {
             posts.push({ id: doc.id, ...doc.data() } as PostDocument);
         });
         return posts;

@@ -12,9 +12,9 @@ const callbackDoAction = async () => {
     store
         .logOutUser()
         .then(() => {
-            router.push('login').catch((e) => console.error(e));
+            router.push('login').catch(e => console.error(e));
         })
-        .catch((e) => {
+        .catch(e => {
             console.error(e);
         });
 };
@@ -41,7 +41,7 @@ const callbackDoAction = async () => {
                 ]"
             />
         </div>
-        <AppButton label="Log out" @doAction="callbackDoAction" />
+        <AppButton label="Log out" @do-action="callbackDoAction" />
     </div>
     <div v-else class="profile-container">
         <span class="error">You are not logged in. To log in please follow this link:</span>

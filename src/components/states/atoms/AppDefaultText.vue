@@ -7,7 +7,7 @@ defineProps<AppDefaultTextProps>();
 </script>
 
 <template>
-    <span class="default-text" v-if="text">{{ text }}</span>
+    <span v-if="text" class="default-text">{{ text }}</span>
 </template>
 
 <style scoped>

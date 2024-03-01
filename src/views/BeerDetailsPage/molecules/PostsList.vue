@@ -12,7 +12,12 @@ defineProps<PostsListProps>();
 
 <template>
     <AppSubTitle v-if="list.length" text="Avis" />
-    <PostItem v-for="post in list" :content="post.content" :starsNumber="post.stars" />
+    <PostItem
+        v-for="post in list"
+        :key="post.id"
+        :content="post.content"
+        :stars-number="post.stars"
+    />
 </template>
 
 <style scoped></style>
